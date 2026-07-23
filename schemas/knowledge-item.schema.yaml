@@ -46,7 +46,7 @@ properties:
     description: 出典側の最終更新日時。
 
   relevance_score:
-    type: number
+    type: [number, "null"]
     description: >
       関連度スコア。算出方法は未確定 (TBD)。
       現時点ではプレースホルダとして扱い、数値の意味を保証しない。

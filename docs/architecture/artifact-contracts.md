@@ -15,6 +15,7 @@
 | QA依頼 | Release Agent（草稿） | `accepted` のWork Item、受領レポート、関連参照 | [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) / [qa-request.md](../../templates/qa-request.md) | 送付先・送付記録の正本: `TBD` | PdM/PO、QAチーム |
 | QA結果参照 | QAチーム（記録主体はTBD） | QA実施結果 | [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | **QA結果の正本システムは未割当 (`TBD`)**。このSchemaは正式記録への参照のみを表す | Orchestrator、Release Agent |
 | リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | 公開先・アーカイブ先の正本: `TBD` | PdM/PO、公開先 |
+| 検証実施記録 | パイロット実施者 | 対象成果物、テスト用の仮定 | [validation-run.schema.yaml](../../schemas/validation-run.schema.yaml) / [validation-run.md](../../templates/validation-run.md) | パイプラインの検証記録。業務上の承認・状態の正本ではない | PdM/PO、設計レビュー担当 |
 
 ## 横断ルール
 
@@ -22,6 +23,7 @@
 - エージェントが出力するものは常に草稿または判断材料である。承認、送付、公開、状態の確定は人間の操作・記録を必要とする。
 - 参照情報に矛盾または同一出所の転記がある場合は、[deduplication-policy.md](deduplication-policy.md) と `knowledge-item` の `origin` / `conflicts` に従う。推測で出所や解決結果を補わない。
 - Work Itemは成果物本体ではなく、状態と成果物参照を束ねる制御単位である。実行時インスタンスの永続化は `TBD`。
+- ドライランで置く仮定は、実際の記録への参照を併記し、検証実施記録に閉じ込める。仮定を実際の業務状態へ反映してはならない。
 
 ## 未確定事項
 

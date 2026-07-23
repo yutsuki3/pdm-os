@@ -5,8 +5,11 @@ $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/jira-task.schema.yaml"
 title: JiraTaskDraft
 type: object
-required: [work_item_id, specification_id, title, summary, acceptance_criteria]
+required: [draft_id, work_item_id, specification_id, title, summary, acceptance_criteria]
 properties:
+  draft_id:
+    type: string
+    description: Jira登録前の草稿を識別するID。採番規則はTBD。jira_issue_keyとは区別する。
   work_item_id:
     type: string
   specification_id:
@@ -26,17 +29,39 @@ properties:
     minItems: 1
     items:
       type: object
-      required: [requirement_ref, text]
+      required: [text, trace_refs]
       properties:
-        requirement_ref:
-          type: string
-          description: FR-001等、仕様書の要件ID。
         text:
           type: string
+        trace_refs:
+          type: array
+          minItems: 1
+          description: この条件の根拠への参照。要件IDだけでなくワイヤーフロー画面IDも参照できる。
+          items:
+            type: object
+            required: [source_type, source_ref, item_ref]
+            properties:
+              source_type:
+                type: string
+                enum: [specification, wireflow, jira_task_draft, jira_issue]
+              source_ref:
+                type: string
+                description: 仕様書ID、ワイヤーフロー参照、草稿ID、またはJira課題キー。
+              item_ref:
+                type: string
+                description: FR-001、S2等、参照元成果物内の項目ID。
   dependency_refs:
     type: array
     items:
-      type: string
+      type: object
+      required: [target_type, target_ref]
+      properties:
+        target_type:
+          type: string
+          enum: [jira_task_draft, jira_issue]
+        target_ref:
+          type: string
+          description: 草稿段階ではdraft_id、登録後はJira課題キーを指定する。
   estimate:
     type: string
     description: 単位・入力時点はTBD。
@@ -50,4 +75,4 @@ properties:
     type: string
     description: 登録後にJira正本を参照するためのキー。
 
-# 未確定事項 (TBD): Jiraプロジェクト、課題タイプ、必須フィールド、見積り・アサイン規則。
+# 未確定事項 (TBD): 草稿IDの採番規則、Jiraプロジェクト、課題タイプ、必須フィールド、見積り・アサイン規則。
