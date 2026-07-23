@@ -117,6 +117,19 @@
 | TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | `released` の公開証跡と過去ノートをどこで保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 要確認 |
 | TBD-054 | 状態遷移履歴の記録先・最小項目 | 誰がいつ何を根拠に状態を確定したかをどこに残すか | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 要確認 |
 
+## 12. パイロット運用
+
+| ID | 項目 | 内容 | 関連ドキュメント | ステータス |
+|---|---|---|---|---|
+| TBD-055 | 実案件・正本アクセスが無い状態でのドライラン手順 | `pilot-core-flow.md` は実案件の存在を前提としており、メカニクスのみを検証するドライランの標準手順が未定義 | [pilot-core-flow.md](../workflows/pilot-core-flow.md), [examples/pilot-feature/dry-run-result.md](../../examples/pilot-feature/dry-run-result.md) | 未着手 |
+| TBD-056 | 仕様書とワイヤーフロー作成の往復要否 | ワイヤーフロー作成時に仕様書に無い論点（種別粒度等）が新たに見つかった場合の往復ルールが未定義 | [templates/wireflow.md](../../templates/wireflow.md), [prompts/create-specification.md](../../prompts/create-specification.md) | 未着手 |
+| TBD-057 | ドライラン用IDと実案件用IDの命名規則 | `WI-PILOT-xxx` のような仮採番と実案件IDの区別方法 | [work-item.schema.yaml](../../schemas/work-item.schema.yaml)（TBD-048関連） | 未着手 |
+| TBD-058 | デザインタスクの受け入れ条件がワイヤーフロー画面IDを参照する場合の表現 | `jira-task.schema.yaml` の `requirement_ref` は仕様書の要件ID(FR-001等)のみを想定しており、ワイヤーフローの画面IDを参照する場合の書き方が未定義 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml), [examples/pilot-feature/jira-tasks/JT-SAMPLE-001-design.md](../../examples/pilot-feature/jira-tasks/JT-SAMPLE-001-design.md) | 未着手（Codex検討事項） |
+| TBD-059 | Jira未登録の草稿タスク同士の依存関係参照方法 | `jira_issue_key` は登録後のみ存在するため、草稿段階の `dependency_refs` が何を指すべきか未定義 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml) | 未着手（Codex検討事項） |
+| TBD-060 | 一部工程だけを仮定してパイプラインを検証する型の未整備 | 受領判断は実際は`pending`のまま、後工程（QA依頼以降）だけをテスト用に仮定して検証する場合の表現方法が、プロンプト・スキーマのどこにも定義されていない | [examples/pilot-feature/dry-run-result.md](../../examples/pilot-feature/dry-run-result.md) 第2部 | 未着手 |
+
 ## 更新履歴
 
 - 初版: このリポジトリのTBDを横断的に集約して作成。
+- 追記: `run-pilot-core-flow.md` のメカニクス確認ドライラン（[examples/pilot-feature/dry-run-result.md](../../examples/pilot-feature/dry-run-result.md)）実施に伴い、TBD-055〜057を追加。
+- 追記: 同ドライラン第2部（フルパイプライン・ダミー検証、Jiraタスク〜リリースノート）実施に伴い、TBD-058〜060を追加。

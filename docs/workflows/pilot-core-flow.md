@@ -44,3 +44,9 @@ PdM/POは、パイロット完了後に次を判断する。
 - QA・リリース工程に進む前に解消すべきTBD
 
 この評価結果をもとに更新する文書・Schemaは `TBD`。重要な方針変更はADRとして記録する。
+
+## 実施履歴
+
+- 【事実】2026-07-23: 実案件・正本アクセス許可がまだ無い状態で、[run-pilot-core-flow.md](../../prompts/run-pilot-core-flow.md) の手順・成果物契約が機能するかを検証するメカニクス確認ドライランを実施した。実データへは一切アクセスせず、既存の架空サンプル (`examples/pilot-feature`) を流用した。結果は [examples/pilot-feature/dry-run-result.md](../../examples/pilot-feature/dry-run-result.md) 第1部を参照。判明したギャップは [tbd-register.md](../decisions/tbd-register.md) のTBD-055〜057に追加。
+- 【事実】2026-07-23: 同日、PdM/POの指示によりダミーデータでの検証範囲をパイプライン全体（Jiraタスク草稿〜リリースノート）に拡大した。「仕様書はテスト用に仮承認された」という明示的なテスト信号のもとで実施し、実際の承認・受領判断・送付・公開は一切行っていない。結果は [dry-run-result.md](../../examples/pilot-feature/dry-run-result.md) 第2部を参照。判明したギャップは [tbd-register.md](../decisions/tbd-register.md) のTBD-058〜060に追加。
+- 実案件を用いた本番パイロットは未実施 (`TBD`)。対象案件・検索許可が確定次第、あらためて実施する。

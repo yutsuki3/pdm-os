@@ -1,0 +1,16 @@
+# これは架空のサンプルです。実在の組織・製品・QA結果とは関係ありません。
+# schemas/qa-result.schema.yaml に準拠したQA結果参照の例。
+# 【テスト用】フルパイプライン・ダミー検証の一部。QA結果の正本システムはTBD-050のため、
+# result_ref は実在しない参照であることを明示する。実際のQA実施・合否判定ではない。
+
+work_item_id: "WI-SAMPLE-001"
+outcome: "passed" # テスト用ダミー。実際のQAは実施していない。
+result_ref: "TBD — QA結果の正本システム未定 (TBD-050) のため、参照できる実記録が存在しない"
+completed_at: "2026-07-23T00:00:00Z"
+reported_by: "TBD（架空のQA担当者、氏名は特定しない）"
+defects_or_findings_refs: []
+notes: >
+  テスト用ダミー結果。FR-002/FR-003についてacceptance-report.mdで指摘された
+  discrepancies（即時反映の定義、既存ユーザー移行時の挙動）は、本ダミー検証では
+  「QA側でも同様に指摘があったが、今回はパイプライン疎通確認のためpassed扱いとする」
+  という仮定の上に成り立っている。実際のQA合否ではない。
