@@ -55,4 +55,4 @@ properties:
       approved_by:
         type: string
 
-# 未確定事項 (TBD): リリース単位、公開先・アーカイブ先、公開承認者・基準。
+# 未確定事項 (TBD): リリース単位、公開先・アーカイブ先。公開承認者・基準は docs/architecture/approval-policy.md により確定（会議体: PdM/PO + エンジニアリード + QAリード）。

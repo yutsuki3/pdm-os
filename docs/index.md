@@ -13,7 +13,7 @@
 - [knowledge-routing.md](architecture/knowledge-routing.md) — 検索・知識ルーティングのルール
 - [artifact-contracts.md](architecture/artifact-contracts.md) — 成果物の入力・出力・Schema・正本の対応
 - [state-machine.md](architecture/state-machine.md) — Work Item のライフサイクル（案件の状態遷移）
-- [approval-policy.md](architecture/approval-policy.md) — 承認ゲートと承認者 (多くがTBD)
+- [approval-policy.md](architecture/approval-policy.md) — 承認ゲートと承認者（承認者・基準は確定。記録先の一部・線引き基準等は引き続きTBD）
 
 ## workflows — 業務フロー詳細
 

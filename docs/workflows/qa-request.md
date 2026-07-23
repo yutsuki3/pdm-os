@@ -13,7 +13,7 @@
 ## 手順
 
 1. **前提確認**
-   Work Itemが `accepted` 状態であることを確認する。受領前にQAを挟む運用があるかどうかはTBD（[approval-policy.md](../architecture/approval-policy.md)）。
+   Work Itemが `accepted` 状態であることを確認する。受領した機能は常に例外なくQAを通す（条件によるスキップは行わない）（[approval-policy.md](../architecture/approval-policy.md)）。
 
 2. **QA依頼文書の草稿作成**
    [prompts/create-qa-request.md](../../prompts/create-qa-request.md) に従い、[templates/qa-request.md](../../templates/qa-request.md) を用いて、対象機能・関連する仕様書/Jiraタスク/実装（GitHub PR）へのリンク、テスト対象範囲を記載する。
@@ -40,7 +40,6 @@
 
 ## 未確定事項
 
-- 受領判断とQA依頼の順序（QA合格が受領の前提条件かどうか）
 - QA依頼の送付先・送付方法
 - entry/exit criteria の具体的な基準
 - QA不合格時の差し戻し先・再依頼フロー

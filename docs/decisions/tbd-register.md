@@ -8,6 +8,7 @@
 - `検討中`: 部分的に方針はあるが未確定
 - `要確認`: ユーザー・関係者への確認が必要
 - `実案件未検証`: Schema・テンプレート上の定義は追加済みで、ダミーデータでの再現も確認できているが、実案件・実システムでの運用検証がまだ行われていない
+- `解決`: ユーザーとの確認により内容が確定した
 
 ## 1. 正本・情報管理
 
@@ -27,14 +28,14 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-010 | 要件確定の承認者・基準 | PdM単独か関係者レビューが必要か | [approval-policy.md](../architecture/approval-policy.md) | 要確認 |
-| TBD-011 | 仕様書承認の承認者・基準 | PdMのみかエンジニア/デザイナー合意も必須か | [approval-policy.md](../architecture/approval-policy.md) | 要確認 |
-| TBD-012 | 受領判断の承認者・基準 | 想定はPdM/POだが確定していない。チェックリスト合格基準も未定 | [approval-policy.md](../architecture/approval-policy.md), [workflows/acceptance.md](../workflows/acceptance.md) | 要確認 |
-| TBD-013 | QA依頼送付可否の承認者・基準 | 受領後に必ずQAを挟むか、条件次第でスキップするか | [approval-policy.md](../architecture/approval-policy.md), [workflows/qa-request.md](../workflows/qa-request.md) | 要確認 |
-| TBD-014 | リリース可否の承認者・基準 | リリース判定会議の有無・承認フロー | [approval-policy.md](../architecture/approval-policy.md) | 要確認 |
-| TBD-015 | 承認に必要な人数・合議の要否 | 各ゲート共通 | [approval-policy.md](../architecture/approval-policy.md) | 未着手 |
-| TBD-016 | 承認の記録方法 | Notion上のプロパティか、Jiraのワークフローか | [approval-policy.md](../architecture/approval-policy.md) | 未着手 |
-| TBD-017 | 緊急時（ホットフィックス等）の承認簡略化規定 | 例外規定の有無 | [approval-policy.md](../architecture/approval-policy.md) | 未着手 |
+| TBD-010 | 要件確定の承認者・基準 | 【決定】承認者はPdM/PO単独（関係者レビュー不要）。基準は背景・目的・受け入れ条件の明文化 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
+| TBD-011 | 仕様書承認の承認者・基準 | 【決定】承認者はPdM/PO単独。基準は必須項目に加え非機能要件・ワイヤーフロー（必要な場合）の明記 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
+| TBD-012 | 受領判断の承認者・基準 | 【決定】承認者はPdM/PO単独。基準は仕様書の要件充足。軽微な差異は記録の上で受領しフォローアップ。「軽微／重大」の線引き基準は別途TBD | [approval-policy.md](../architecture/approval-policy.md), [workflows/acceptance.md](../workflows/acceptance.md) | 解決 |
+| TBD-013 | QA依頼送付可否の承認者・基準 | 【決定】承認者はPdM/PO単独。受領後は例外なく常にQAを通す（条件付きスキップなし） | [approval-policy.md](../architecture/approval-policy.md), [workflows/qa-request.md](../workflows/qa-request.md) | 解決 |
+| TBD-014 | リリース可否の承認者・基準 | 【決定】承認者は会議体（PdM/PO + エンジニアリード + QAリード）。基準はQA合格 + リリースノート内容確認 + リスク確認 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
+| TBD-015 | 承認に必要な人数・合議の要否 | 【決定】要件確定・仕様書承認・受領判断・QA依頼送付可否はPdM/PO単独。リリース可否のみ3者の会議体 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
+| TBD-016 | 承認の記録方法 | 【決定】全ゲート共通でNotion上のプロパティに記録 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
+| TBD-017 | 緊急時（ホットフィックス等）の承認簡略化規定 | 【決定】例外規定は設けない。緊急時も常に通常フローを通す | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
 | TBD-018 | 優先度の判断基準 | 要求・要望の優先度をどう決めるか | [templates/requirement.md](../../templates/requirement.md) | 要確認 |
 
 ## 3. Jira連携
@@ -84,7 +85,7 @@
 |---|---|---|---|---|
 | TBD-035 | リリース単位の定義 | バージョニング規則（日次/週次/バージョン番号等） | [templates/release-note.md](../../templates/release-note.md) | 要確認 |
 | TBD-036 | リリースノートの公開先・フォーマット | Notion/Confluence/社内Slack/顧客向け等 | [workflows/release-note.md](../workflows/release-note.md) | 要確認 |
-| TBD-037 | 公開承認者・基準 | 誰が公開を承認するか | [workflows/release-note.md](../workflows/release-note.md) | 要確認 |
+| TBD-037 | 公開承認者・基準 | 【決定】TBD-014と同一。会議体（PdM/PO + エンジニアリード + QAリード）が、QA合格 + リリースノート内容確認 + リスク確認を基準に承認 | [approval-policy.md](../architecture/approval-policy.md), [workflows/release-note.md](../workflows/release-note.md) | 解決 |
 | TBD-038 | 過去のリリースノートのアーカイブ先 | Confluence想定だが未確認 | [workflows/release-note.md](../workflows/release-note.md) | 要確認 |
 
 ## 9. AIツール・役割分担
@@ -138,3 +139,4 @@
 - 更新: CodexレビューによりTBD-058〜060の再利用定義を追加。実案件での運用検証が完了するまで検討中とする。TBD-061を追加。
 - 更新: 新形式（draft_id / trace_refs / dependency_refs / validation-run）を使ってダミーパイプラインを再実行し（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)）、TBD-058〜060の定義がダミーデータ上で機能することを確認。ステータスを`実案件未検証`に統一（実案件・実システムでの運用検証が残タスクであることを明示）。
 - 更新: Round 2のCodexレビューにより、`draft_id` の形式・同一草稿リスト内の一意性、検証用仮定の実記録参照必須を定義へ反映。TBD-061に機械検証方式の提案を追記。
+- 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。

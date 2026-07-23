@@ -9,7 +9,7 @@
 - 入力元: PdM/PO（要求・要望の受け手）
 - Knowledge Agent: 現行資料・過去資料の検索
 - Specification Agent: 仕様書・ワイヤーフローの草稿作成
-- 承認者: TBD ([approval-policy.md](../architecture/approval-policy.md))
+- 承認者: PdM/PO単独（要件確定・仕様書承認とも。[approval-policy.md](../architecture/approval-policy.md)）
 
 ## 手順
 
@@ -18,7 +18,7 @@
    出力: Work Item を `requested` 状態で作成 ([schemas/work-item.schema.yaml](../../schemas/work-item.schema.yaml))。
 
 2. **要件への整理**
-   PdM/POが背景・目的・制約を整理し、要件として合意する。合意の方法（誰と、どのように）はTBD。
+   PdM/POが背景・目的・受け入れ条件を明文化し、要件として合意する。承認者はPdM/PO単独で、関係者レビューは必須としない（[approval-policy.md](../architecture/approval-policy.md)）。
    出力: Work Item を `requirement_defined` に遷移。
 
 3. **資料検索**
@@ -32,7 +32,7 @@
    必要に応じて [templates/wireflow.md](../../templates/wireflow.md) を用いてワイヤーフローを作成する。作成ツール（Figma等）との連携方法はTBD。
 
 6. **レビュー・承認**
-   Work Item を `spec_review` に遷移し、レビューを経て承認されると `spec_approved` になる。承認者・基準はTBD。
+   Work Item を `spec_review` に遷移し、レビューを経て承認されると `spec_approved` になる。承認者はPdM/PO単独。承認基準は、仕様書テンプレートの必須項目に加え、非機能要件・ワイヤーフロー（必要な場合）が明記済みであること（[approval-policy.md](../architecture/approval-policy.md)）。
 
 7. **Notionへの反映**
    承認された仕様書はNotion（正本）へ反映される。反映方法・ページ構成はTBD ([source-of-truth.md](../architecture/source-of-truth.md))。
@@ -48,6 +48,4 @@
 
 ## 未確定事項
 
-- 要件合意のプロセス（レビュー会議の要否、関係者の範囲）
-- 仕様書承認者・承認基準
 - ワイヤーフロー作成ツールとの連携方法
