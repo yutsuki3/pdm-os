@@ -2,7 +2,7 @@
 テンプレート: QA依頼
 対応スキーマ: schemas/qa-request.schema.yaml（受領情報は schemas/acceptance-report.schema.yaml を参照）
 関連ワークフロー: docs/workflows/qa-request.md
-送付先・送付方法・合否基準はTBD。
+送付先はチャットツール（例: Slack）。合否基準はEntry/Exit欄参照。
 -->
 
 # QA依頼: {{タイトル}}
@@ -34,8 +34,8 @@
 
 ## 合否基準 (Entry / Exit Criteria)
 
-- Entry: {{TBD}}
-- Exit: {{TBD}}
+- Entry: 受領済み（accepted）で、テスト環境にデプロイ済みであること
+- Exit: 仕様書の受け入れ条件を全件テスト済みで、バグがないこと
 
 ## リスク・注意点
 
@@ -43,4 +43,4 @@
 
 ## 送付先
 
-{{TBD — QAチームへの送付方法（専用Jiraチケット/フォーム等）未確定}}
+{{チャットツール（例: Slack）でQAチームへ直接依頼。送付したメッセージへのリンクを記録}}

@@ -22,24 +22,22 @@
    検証環境（ステージング等）・対象ブラウザ/デバイス・除外項目を明記する。具体的な環境情報・命名はTBD。
 
 4. **合否基準の明記**
-   QA合格・不合格の判定基準（entry/exit criteria）を明記する。基準の詳細はTBD。
+   QA合格・不合格の判定基準（entry/exit criteria）を明記する。Entry基準は「受領済みでテスト環境にデプロイ済み」、Exit基準は「仕様書の受け入れ条件を全件テスト済みでバグなし」とする。
 
 5. **送付**
-   PdM/POが内容を確認し、QAチームへ送付する。送付先・送付方法（Jira上のQA用チケット、専用フォーム等）はTBD。
+   PdM/POが内容を確認し、チャットツール（例: Slack）でQAチームへ直接依頼する。
    Work Itemを `qa_requested` に遷移。
 
 6. **結果の反映**
-   QAチームの正式な結果記録への参照（[schemas/qa-result.schema.yaml](../../schemas/qa-result.schema.yaml)）を確認した上で、`qa_passed` または `qa_failed` に遷移する。QA結果の正本システムはTBDであり、現時点ではこの遷移の証跡を一意に検証できない。`qa_failed` 時の差し戻し先はTBD ([state-machine.md](../architecture/state-machine.md))。
+   QAチームの正式な結果記録への参照（[schemas/qa-result.schema.yaml](../../schemas/qa-result.schema.yaml)）を確認した上で、`qa_passed` または `qa_failed` に遷移する。QA結果の正本システムはTBDであり、現時点ではこの遷移の証跡を一意に検証できない。`qa_failed` の場合はQA指摘を記載の上、Work Itemを `in_progress` に戻し、同じJiraタスクで再提出を待つ（[state-machine.md](../architecture/state-machine.md)）。再依頼条件の詳細はTBD。
 
 ## 入力/出力まとめ
 
 | ステップ | 入力 | 出力 |
 |---|---|---|
 | QA依頼草稿 | 受領済み成果物 + 仕様書 + 実装 | `templates/qa-request.md` を埋めた依頼文書 |
-| 送付 | 承認済みQA依頼文書 | QAチームへの依頼（送付先・方法TBD） |
+| 送付 | 承認済みQA依頼文書 | QAチームへのチャットツール経由の依頼 |
 
 ## 未確定事項
 
-- QA依頼の送付先・送付方法
-- entry/exit criteria の具体的な基準
-- QA不合格時の差し戻し先・再依頼フロー
+- QA不合格時の再依頼条件の詳細

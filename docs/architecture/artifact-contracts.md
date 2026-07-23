@@ -14,7 +14,7 @@
 | 受領レポート | Acceptance Agent（草稿） | 承認済み仕様書、GitHub実装、Drive受領原本 | [acceptance-report.schema.yaml](../../schemas/acceptance-report.schema.yaml) | GitHub/Google Driveへの参照に基づく判断材料。最終判断は人間 | PdM/PO、Release Agent |
 | QA依頼 | Release Agent（草稿） | `accepted` のWork Item、受領レポート、関連参照 | [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) / [qa-request.md](../../templates/qa-request.md) | 送付先・送付記録の正本: `TBD` | PdM/PO、QAチーム |
 | QA結果参照 | QAチーム（記録主体はTBD） | QA実施結果 | [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | **QA結果の正本システムは未割当 (`TBD`)**。このSchemaは正式記録への参照のみを表す | Orchestrator、Release Agent |
-| リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | 公開先・アーカイブ先の正本: `TBD` | PdM/PO、公開先 |
+| リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | アーカイブ先はNotion（決定）。公開チャネルの具体形式は `TBD` | PdM/PO、公開先 |
 | 検証実施記録 | パイロット実施者 | 対象成果物、テスト用の仮定 | [validation-run.schema.yaml](../../schemas/validation-run.schema.yaml) / [validation-run.md](../../templates/validation-run.md) | パイプラインの検証記録。業務上の承認・状態の正本ではない | PdM/PO、設計レビュー担当 |
 
 ## 横断ルール

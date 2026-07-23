@@ -1,5 +1,5 @@
 # Release Note スキーマ
-# templates/release-note.md に対応する公開前草稿。公開先・アーカイブ先の正本はTBD。
+# templates/release-note.md に対応する公開前草稿。アーカイブ先はNotion（決定）。公開チャネルの具体形式はTBD。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/release-note.schema.yaml"
@@ -55,4 +55,4 @@ properties:
       approved_by:
         type: string
 
-# 未確定事項 (TBD): リリース単位、公開先・アーカイブ先。公開承認者・基準は docs/architecture/approval-policy.md により確定（会議体: PdM/PO + エンジニアリード + QAリード）。
+# 未確定事項 (TBD): 公開チャネルの具体形式（社内向け/顧客向け）。リリース単位・アーカイブ先・公開承認者・基準は docs/architecture/approval-policy.md により確定。

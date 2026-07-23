@@ -2,13 +2,14 @@
 テンプレート: リリースノート
 関連ワークフロー: docs/workflows/release-note.md
 対応スキーマ: schemas/release-note.schema.yaml
-リリース単位の定義・公開先はTBD。
+リリース単位は機能単位の随時リリース。社内向け/顧客向けを別々に作成し、Notionにアーカイブする。公開チャネルの具体形式はTBD。
 -->
 
 # リリースノート: {{バージョン/日付}}
 
 - リリース日: {{YYYY-MM-DD}}
-- 対象範囲: {{TBD — リリース単位の定義未確定 (バージョニング/日次/週次等)}}
+- 対象範囲: {{機能単位の随時リリース。今回含めるWork Item群}}
+- 対象読者: {{社内向け / 顧客向け — 別々に作成する}}
 
 ## 概要
 
@@ -30,10 +31,10 @@
 
 ## 公開先
 
-{{TBD — Notion/Confluence/社内Slack/顧客向けチャネル等、公開先未確定}}
+{{社内向け/顧客向けそれぞれのチャネル。具体的な公開先・フォーマットはTBD}}
 
 ## 承認
 
 | 承認者 | 承認日 |
 |---|---|
-| TBD (docs/architecture/approval-policy.md 参照) | |
+| 会議体（PdM/PO + エンジニアリード + QAリード。docs/architecture/approval-policy.md 参照） | |
