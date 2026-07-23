@@ -1,0 +1,58 @@
+# Release Note スキーマ
+# templates/release-note.md に対応する公開前草稿。公開先・アーカイブ先の正本はTBD。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/release-note.schema.yaml"
+title: ReleaseNote
+type: object
+required: [release_identifier, release_date, changes]
+properties:
+  release_identifier:
+    type: string
+    description: バージョンまたは日付。リリース単位の規則はTBD。
+  release_date:
+    type: string
+    format: date
+  scope_description:
+    type: string
+  summary:
+    type: string
+  changes:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [work_item_id, summary]
+      properties:
+        work_item_id:
+          type: string
+        summary:
+          type: string
+        specification_url:
+          type: string
+        jira_issue_keys:
+          type: array
+          items:
+            type: string
+        github_refs:
+          type: array
+          items:
+            type: string
+  known_issues:
+    type: array
+    items:
+      type: string
+  rollout_plan:
+    type: string
+  publication:
+    type: object
+    properties:
+      destination_ref:
+        type: string
+      published_at:
+        type: string
+        format: date-time
+      approved_by:
+        type: string
+
+# 未確定事項 (TBD): リリース単位、公開先・アーカイブ先、公開承認者・基準。

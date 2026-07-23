@@ -1,0 +1,74 @@
+# QA Request スキーマ
+# templates/qa-request.md に対応する送付前の草稿。QA依頼の送付先・正式な記録先はTBD。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/qa-request.schema.yaml"
+title: QaRequest
+type: object
+required: [work_item_id, specification_id, requested_at, requested_by, scope]
+properties:
+  work_item_id:
+    type: string
+  specification_id:
+    type: string
+  requested_at:
+    type: string
+    format: date
+  requested_by:
+    type: string
+  overview:
+    type: string
+  links:
+    type: object
+    properties:
+      notion_spec_url:
+        type: string
+      jira_issue_keys:
+        type: array
+        items:
+          type: string
+      github_refs:
+        type: array
+        items:
+          type: string
+      acceptance_report_ref:
+        type: string
+  scope:
+    type: object
+    required: [included]
+    properties:
+      included:
+        type: array
+        items:
+          type: string
+      excluded:
+        type: array
+        items:
+          type: string
+  test_environment:
+    type: string
+  entry_criteria:
+    type: array
+    items:
+      type: string
+  exit_criteria:
+    type: array
+    items:
+      type: string
+  risks:
+    type: array
+    items:
+      type: string
+  delivery:
+    type: object
+    description: 送付が実際に行われた場合のみ記録する。送付先・方法はTBD。
+    properties:
+      sent_at:
+        type: string
+        format: date-time
+      sent_by:
+        type: string
+      destination_ref:
+        type: string
+
+# 未確定事項 (TBD): QA送付先・方法、entry/exit criteria、送付済み記録の正本。

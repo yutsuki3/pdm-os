@@ -11,7 +11,7 @@ PdM OSの設計・運用には、複数のAIツール（Claude Code, Codex, Gemi
 ## 決定
 
 1. `docs/agents/*.md`（Orchestrator, Knowledge Agent, Specification Agent, Acceptance Agent, Release Agent）は、特定のAIモデル・ツールに依存しない **機能的な役割** として定義する。
-2. 現時点でのAIツールごとの担当割り当ては、機能的な役割定義とは別のドキュメント [docs/agents/ai-tool-roles.md](ai-tool-roles.md) に切り離して記録し、「暫定」であることを明記する。
+2. 現時点でのAIツールごとの担当割り当ては、機能的な役割定義とは別のドキュメント [docs/agents/ai-tool-roles.md](../agents/ai-tool-roles.md) に切り離して記録し、「暫定」であることを明記する。
 3. Claude Codeの現段階の担当（業務フロー構造化、状態遷移設計、成果物と責務の整理、承認点設計、不足ルール抽出、文書・テンプレート初期案作成）と、Codexの後続の担当（Schema・ファイル構造・文書間整合性のレビューと具体化）は事実として記録するが、Gemini・Notion AIの担当は未定 (`TBD`) のまま扱う。
 
 ## 影響

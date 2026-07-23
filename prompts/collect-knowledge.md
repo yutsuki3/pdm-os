@@ -18,6 +18,7 @@
 3. 検索結果を [schemas/knowledge-item.schema.yaml](../schemas/knowledge-item.schema.yaml) 形式に変換する。各アイテムに `source_system` を必ず明記する。
 4. Notion由来（現行仕様）とConfluence由来（過去仕様）は `is_current_spec` フラグで明確に区別する。混同しない。
 5. [docs/architecture/deduplication-policy.md](../docs/architecture/deduplication-policy.md) に従い、同じ出所に由来する複数のヒットを1つの根拠として扱う。検索経路が複数あること自体は問題ないが、件数の多さを確からしさとして扱わない。
+   転記・引用元を確認できた場合は各アイテムの `origin` に記録し、確認できない場合は `origin.origin_status: unknown` とする。出所を推測して補完しない。
 6. 複数の出典が矛盾する情報を含む場合、統合・要約せず、両方を提示し `conflict_notes` に矛盾がある旨を記載する（[ADR-0003](../docs/decisions/ADR-0003-conflict-logging-over-silent-resolution.md)）。
 
 ## 出力形式

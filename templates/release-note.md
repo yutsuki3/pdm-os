@@ -1,6 +1,7 @@
 <!--
 テンプレート: リリースノート
 関連ワークフロー: docs/workflows/release-note.md
+対応スキーマ: schemas/release-note.schema.yaml
 リリース単位の定義・公開先はTBD。
 -->
 

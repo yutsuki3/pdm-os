@@ -4,7 +4,7 @@
 
 受領済みの成果物に対するQA依頼文書の作成と、QA合格後のリリースノート作成を支援する。
 
-対応するプロンプト定義: [prompts/create-release-note.md](../../prompts/create-release-note.md)
+対応するプロンプト定義: [prompts/create-qa-request.md](../../prompts/create-qa-request.md), [prompts/create-release-note.md](../../prompts/create-release-note.md)
 
 この役割は機能的な定義であり、特定のAIモデル・ツールに依存しない。現時点の暫定的な担当割り当ては [docs/agents/ai-tool-roles.md](ai-tool-roles.md) を参照。
 

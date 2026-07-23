@@ -1,6 +1,7 @@
 <!--
 テンプレート: ワイヤーフロー
 関連ワークフロー: docs/workflows/requirement-to-spec.md
+対応スキーマ: schemas/wireflow.schema.yaml
 外部デザインツール (Figma等) との連携方法はTBD。
 -->
 

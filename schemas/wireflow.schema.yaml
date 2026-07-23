@@ -1,0 +1,52 @@
+# Wireflow スキーマ
+# templates/wireflow.md に対応する画面・遷移の構造。正式ツール・同期方法はTBD。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/wireflow.schema.yaml"
+title: Wireflow
+type: object
+required: [specification_id, screens, transitions]
+properties:
+  specification_id:
+    type: string
+  external_design_url:
+    type: string
+    description: 外部デザインファイルがある場合の参照。正本の有無・ツールはTBD。
+  screens:
+    type: array
+    items:
+      type: object
+      required: [id, name, purpose]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        purpose:
+          type: string
+        key_elements:
+          type: array
+          items:
+            type: string
+        notes:
+          type: string
+  transitions:
+    type: array
+    items:
+      type: object
+      required: [from_screen_id, action, to_screen_id]
+      properties:
+        from_screen_id:
+          type: string
+        action:
+          type: string
+        to_screen_id:
+          type: string
+        condition:
+          type: string
+  open_questions:
+    type: array
+    items:
+      type: string
+
+# 未確定事項 (TBD): ワイヤーフローの正式ツール、外部成果物との同期・正本。

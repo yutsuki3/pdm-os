@@ -1,0 +1,53 @@
+# Jira Task Draft スキーマ
+# Jira登録前の候補を表す。Jira課題そのものの正本はJira。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/jira-task.schema.yaml"
+title: JiraTaskDraft
+type: object
+required: [work_item_id, specification_id, title, summary, acceptance_criteria]
+properties:
+  work_item_id:
+    type: string
+  specification_id:
+    type: string
+  title:
+    type: string
+  issue_type:
+    type: string
+    description: Jira上の課題タイプ体系はTBD。
+  project_key:
+    type: string
+    description: JiraプロジェクトキーはTBD。
+  summary:
+    type: string
+  acceptance_criteria:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      required: [requirement_ref, text]
+      properties:
+        requirement_ref:
+          type: string
+          description: FR-001等、仕様書の要件ID。
+        text:
+          type: string
+  dependency_refs:
+    type: array
+    items:
+      type: string
+  estimate:
+    type: string
+    description: 単位・入力時点はTBD。
+  labels_or_components:
+    type: array
+    items:
+      type: string
+  assignee_candidate:
+    type: string
+  jira_issue_key:
+    type: string
+    description: 登録後にJira正本を参照するためのキー。
+
+# 未確定事項 (TBD): Jiraプロジェクト、課題タイプ、必須フィールド、見積り・アサイン規則。

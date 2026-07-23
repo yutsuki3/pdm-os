@@ -55,12 +55,35 @@ properties:
   functional_requirements:
     type: array
     items:
-      type: string
+      type: object
+      required: [id, text]
+      properties:
+        id:
+          type: string
+          description: "仕様書内で一意の要件識別子（例: FR-001）。採番規則はTBD。"
+        text:
+          type: string
+        source_refs:
+          type: array
+          items:
+            type: string
+          description: 要件・知識アイテムなど、この要件の根拠への参照。
 
   non_functional_requirements:
     type: array
     items:
-      type: string
+      type: object
+      required: [id, text]
+      properties:
+        id:
+          type: string
+          description: "仕様書内で一意の要件識別子（例: NFR-001）。採番規則はTBD。"
+        text:
+          type: string
+        source_refs:
+          type: array
+          items:
+            type: string
     description: 性能・可用性・セキュリティ等。項目の必須範囲はTBD。
 
   wireflow_ref:
@@ -91,7 +114,22 @@ properties:
           type: string
           format: date-time
 
+allOf:
+  - if:
+      properties:
+        status:
+          const: approved
+      required: [status]
+    then:
+      required: [source_url, approvals]
+      properties:
+        source_url:
+          minLength: 1
+        approvals:
+          minItems: 1
+
 # 未確定事項 (TBD):
 # - id の採番ルール
 # - non_functional_requirements の必須範囲
 # - approvals.approver の具体的な役職・人数要件
+# - functional_requirements / non_functional_requirements のID採番規則

@@ -51,6 +51,11 @@ properties:
           enum: [met, not_met, partially_met, unclear]
         notes:
           type: string
+        evidence_refs:
+          type: array
+          items:
+            type: string
+          description: この判定に用いたGitHub/Google Drive等の直接参照。
 
   discrepancies:
     type: array
@@ -70,6 +75,15 @@ properties:
   decided_at:
     type: string
     format: date-time
+
+allOf:
+  - if:
+      properties:
+        decision:
+          enum: [accepted, rejected]
+      required: [decision]
+    then:
+      required: [decided_by, decided_at]
 
 # 未確定事項 (TBD):
 # - GitHub実装事実の単位の定義

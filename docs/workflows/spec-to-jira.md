@@ -6,7 +6,8 @@
 
 ## 関係者・エージェント
 
-- Specification Agent / Orchestrator: タスク分解の草稿作成
+- Specification Agent: タスク分解の草稿作成
+- Orchestrator: 前提状態を確認し、Specification Agentの呼び出しと状態遷移の提案を行う
 - PdM/PO: タスク分解内容の確認・Jiraへの登録可否判断
 
 ## 手順

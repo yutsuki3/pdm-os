@@ -10,6 +10,7 @@ title: KnowledgeItem
 type: object
 required:
   - source_system
+  - source_id
   - title
   - url
 properties:
@@ -60,7 +61,53 @@ properties:
     type: string
     description: 他のknowledge-itemと矛盾する場合の注記。自動解決はしない。
 
+  origin:
+    type: object
+    description: >
+      このアイテムが転記・引用・参照である場合の、確認できた一次出所。
+      同一出所のアイテムを一つの根拠として束ねるために使う。
+      一次出所を確認できない場合は origin_status を unknown とし、推測で埋めない。
+    required: [origin_status]
+    properties:
+      origin_status:
+        type: string
+        enum: [confirmed, unknown]
+      source_system:
+        type: string
+        enum: [notion, confluence, google_drive, jira, github]
+      source_id:
+        type: string
+      url:
+        type: string
+      note:
+        type: string
+    allOf:
+      - if:
+          properties:
+            origin_status:
+              const: confirmed
+          required: [origin_status]
+        then:
+          required: [source_system, source_id, url]
+
+  conflicts:
+    type: array
+    description: 検知した矛盾の相手と内容。解決結果や優先順位の確定は含めない。
+    items:
+      type: object
+      required: [source_system, source_id, url, description]
+      properties:
+        source_system:
+          type: string
+          enum: [notion, confluence, google_drive, jira, github]
+        source_id:
+          type: string
+        url:
+          type: string
+        description:
+          type: string
+
 # 未確定事項 (TBD):
 # - relevance_score の算出方法
 # - 各システムへの実際の検索アクセス手段 (API / エクスポートデータ)
-# - 検索結果の重複排除ルール
+# - 同一出所の機械的な判定方法と origin の入力方法

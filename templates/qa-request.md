@@ -1,6 +1,6 @@
 <!--
 テンプレート: QA依頼
-対応スキーマ: schemas/acceptance-report.schema.yaml (受領情報を参照)
+対応スキーマ: schemas/qa-request.schema.yaml（受領情報は schemas/acceptance-report.schema.yaml を参照）
 関連ワークフロー: docs/workflows/qa-request.md
 送付先・送付方法・合否基準はTBD。
 -->

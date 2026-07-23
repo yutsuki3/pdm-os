@@ -4,11 +4,11 @@
 
 ## 目的
 
-QA合格済みのWork Item群から、[templates/release-note.md](../templates/release-note.md) 形式のリリースノート草稿を作成する。QA依頼文書 ([templates/qa-request.md](../templates/qa-request.md)) の作成にも本プロンプトの一部手順を準用する。
+QA合格済みのWork Item群から、[templates/release-note.md](../templates/release-note.md) 形式のリリースノート草稿を作成する。QA依頼の作成は [create-qa-request.md](create-qa-request.md) を使用する。
 
 ## 入力
 
-- 対象Work Item群（`state: qa_passed`、または QA依頼作成時は `state: accepted`）
+- 対象Work Item群（`state: qa_passed`）
 - 各Work Itemに紐づく仕様書・Jiraタスク・GitHub実装
 
 ## 手順 (リリースノート作成)
@@ -18,15 +18,9 @@ QA合格済みのWork Item群から、[templates/release-note.md](../templates/r
 3. 既知の問題があれば `discrepancies` (受領レポート) やQA結果から拾い、「既知の問題」に記載する。なければ「なし」と明記する（省略しない）。
 4. ロールアウト計画・公開先はTBDのまま出力する。
 
-## 手順 (QA依頼作成)
-
-1. 対象Work Itemの仕様書・Jiraタスク・GitHub PR・受領レポートへのリンクをまとめる。
-2. テスト対象範囲・検証環境・合否基準はTBDのまま出力し、PdM/POに確認を促す。
-
 ## 出力形式
 
-- リリースノート: `templates/release-note.md` を埋めたMarkdown
-- QA依頼: `templates/qa-request.md` を埋めたMarkdown
+[schemas/release-note.schema.yaml](../schemas/release-note.schema.yaml) に対応する、`templates/release-note.md` を埋めたMarkdown。
 
 ## 禁止事項
 

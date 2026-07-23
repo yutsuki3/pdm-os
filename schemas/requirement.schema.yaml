@@ -1,0 +1,54 @@
+# Requirement スキーマ
+#
+# templates/requirement.md を構造化した要求・要望の記録。
+# Work Item はこの成果物を参照する制御レコードであり、要求原文の正本ではない。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/requirement.schema.yaml"
+title: Requirement
+type: object
+required: [work_item_id, title, recorded_at, recorded_by, request_source, request_text]
+properties:
+  work_item_id:
+    type: string
+  title:
+    type: string
+  recorded_at:
+    type: string
+    format: date
+  recorded_by:
+    type: string
+  request_source:
+    type: object
+    required: [requester, channel]
+    properties:
+      requester:
+        type: string
+      channel:
+        type: string
+  request_text:
+    type: string
+    description: 要求・要望の原文または原文への正確な参照。
+  background_and_goal:
+    type: string
+  current_spec_url:
+    type: string
+  related_history_refs:
+    type: array
+    items:
+      type: string
+  constraints:
+    type: object
+    properties:
+      due_date:
+        type: string
+        format: date
+      scope:
+        type: string
+      out_of_scope:
+        type: string
+  priority:
+    type: string
+    description: 判断基準はTBD。未確定の場合はTBDを明示する。
+
+# 未確定事項 (TBD): priority の判断基準、要求原文の外部正本と保存先。

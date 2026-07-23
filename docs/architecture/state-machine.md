@@ -26,52 +26,58 @@ Work Item ([schemas/work-item.schema.yaml](../../schemas/work-item.schema.yaml))
 
 ## 状態遷移図
 
+【提案】下図は既存ワークフローをMermaidで機械可読に表したもの。戻り先が未確定の遷移は図に描かず、実装時に自動遷移させてはならない。
+
+```mermaid
+stateDiagram-v2
+    [*] --> requested
+    requested --> requirement_defined: 要件を整理・合意
+    requirement_defined --> spec_drafting: 仕様草稿を開始
+    spec_drafting --> spec_review: 草稿・必要なワイヤーフローを提示
+    spec_review --> spec_drafting: レビューで修正が必要
+    spec_review --> spec_approved: 人間が承認
+    spec_approved --> jira_tasks_created: Jiraタスクを登録・相互リンク
+    jira_tasks_created --> in_progress: Jiraで作業開始
+    in_progress --> delivered: 成果物を提出
+    delivered --> acceptance_review: 受領レポートを作成
+    acceptance_review --> accepted: 人間が受領
+    acceptance_review --> rejected: 人間が差し戻し
+    accepted --> qa_requested: 人間がQA依頼を送付
+    qa_requested --> qa_passed: QA結果: passed
+    qa_requested --> qa_failed: QA結果: failed
+    qa_passed --> release_note_drafting: 草稿を開始
+    release_note_drafting --> released: 人間が公開・リリース
 ```
-requested
-   │ 要件整理
-   ▼
-requirement_defined
-   │ 仕様書草稿開始
-   ▼
-spec_drafting ──┐
-   │            │ 資料検索・差し戻し
-   ▼            │
-spec_review ────┘
-   │ 承認 (承認者TBD)
-   ▼
-spec_approved
-   │ タスク分解
-   ▼
-jira_tasks_created
-   │ Jira側で進行
-   ▼
-in_progress
-   │ 成果物提出
-   ▼
-delivered
-   │ 受領判断
-   ▼
-acceptance_review ──► rejected ──(差し戻し)──► in_progress
-   │ 受領
-   ▼
-accepted
-   │ QA依頼
-   ▼
-qa_requested ──► qa_failed ──(差し戻し)──► in_progress (もしくはTBD)
-   │ QA合格
-   ▼
-qa_passed
-   │ リリースノート作成
-   ▼
-release_note_drafting
-   │ リリース
-   ▼
-released
-```
+
+## 遷移の開始条件・完了条件
+
+【提案】実装・運用で確認する最小の遷移契約を示す。ここで「TBD」とした条件は、状態を確定するための情報が未定義であることを意味する。エージェントはその条件を推測して遷移してはならない。
+
+`rejected` と `qa_failed` からの戻り線は、戻り先が未決定のため図には描かない。図に特定状態への線を置くことは、その遷移が確定済みであるという誤解を招くためである。
+
+| 遷移 | 開始条件（前状態で確認するもの） | 完了条件・遷移証跡 | 状態を確定する主体 |
+|---|---|---|---|
+| `requested` → `requirement_defined` | 要求・要望の記録がある | 要件の合意記録。承認者・基準・記録先: `TBD` | 人間（TBD） |
+| `requirement_defined` → `spec_drafting` | 合意済み要件とWork Item参照がある | 仕様書草稿の作成を開始した記録 | Orchestratorは提案のみ。実行形態: `TBD` |
+| `spec_drafting` → `spec_review` | 仕様書草稿、必要な場合はワイヤーフロー草稿 | レビューに提示できる草稿。ワイヤーフローが必須となる条件: `TBD` | 人間がレビュー開始を確認 |
+| `spec_review` → `spec_drafting` | レビューで修正が必要 | 修正要求と対象草稿への参照。記録形式: `TBD` | 人間 |
+| `spec_review` → `spec_approved` | レビュー対象の仕様書草稿 | 人間の承認記録とNotion正本URL | 人間（承認者・基準: `TBD`） |
+| `spec_approved` → `jira_tasks_created` | 承認済みNotion仕様書 | Jira課題が作成され、仕様書・Work Itemと相互リンク済み | 人間が登録・確認 |
+| `jira_tasks_created` → `in_progress` | Jira課題が存在する | 作業開始のJira状態。Work Itemへの集約規則: `TBD` | Jira情報を人間が確認 |
+| `in_progress` → `delivered` | 配下の作業が完了報告された | 成果物（GitHub/Drive）への参照。完了判定・集約規則: `TBD` | 人間が確認 |
+| `delivered` → `acceptance_review` | 承認済み仕様書、GitHub実装、Drive受領原本を特定できる | 受領レポート草稿 | Acceptance Agentは草稿作成のみ |
+| `acceptance_review` → `accepted` / `rejected` | 受領レポートと差異一覧 | 人間の判断記録（`decision`、判断者、日時） | 人間（承認者・基準: `TBD`） |
+| `rejected` → 戻り先 | 差し戻し理由 | 戻り先（`requirement_defined` / `spec_drafting` / `in_progress` 等）の選択。**遷移先と基準: `TBD`** | 人間 |
+| `accepted` → `qa_requested` | QA依頼草稿と受領済み成果物 | QA依頼の実送付記録。送付先・正本: `TBD` | 人間 |
+| `qa_requested` → `qa_passed` / `qa_failed` | QA依頼送付済み | QAチームの正式な結果記録への参照。結果の正本: `TBD` | QAチームの結果を人間が反映 |
+| `qa_failed` → 戻り先 | QA不合格結果・指摘への参照 | 戻り先と再依頼条件。**いずれも `TBD`** | 人間 |
+| `qa_passed` → `release_note_drafting` | QA合格結果への参照 | リリースノート草稿 | Release Agentは草稿作成のみ |
+| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録と公開先への参照 | 人間（承認者・公開先: `TBD`） |
 
 ## 未確定事項
 
 - `spec_review` → `spec_approved` の承認者・承認条件は TBD ([approval-policy.md](approval-policy.md) 参照)。
-- `rejected` / `qa_failed` からの差し戻し先が常に `in_progress` でよいか（`requirement_defined` に戻すケースがあるか）はTBD。
+- `rejected` / `qa_failed` からの差し戻し先が常に `in_progress` でよいか（`requirement_defined` / `spec_drafting` に戻すケースがあるか）はTBD。戻り先は図に示しておらず、確定した遷移規則ではない。
 - 1つのWork Itemが複数のJiraタスクに分解された場合、それぞれの進捗をどうWork Item全体の状態に集約するかはTBD。
 - 状態遷移をJiraのステータスと自動同期するか、PdM OS独自に管理するかはTBD。
+- QA結果の正本システム、QA依頼の送付記録の正本、遷移履歴の保存先はTBD。

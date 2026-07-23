@@ -11,6 +11,7 @@
 - [source-of-truth.md](architecture/source-of-truth.md) — 正本マッピングと参照ルール（6ドメイン）
 - [deduplication-policy.md](architecture/deduplication-policy.md) — 情報取得と重複排除の方針
 - [knowledge-routing.md](architecture/knowledge-routing.md) — 検索・知識ルーティングのルール
+- [artifact-contracts.md](architecture/artifact-contracts.md) — 成果物の入力・出力・Schema・正本の対応
 - [state-machine.md](architecture/state-machine.md) — Work Item のライフサイクル（案件の状態遷移）
 - [approval-policy.md](architecture/approval-policy.md) — 承認ゲートと承認者 (多くがTBD)
 

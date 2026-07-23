@@ -16,7 +16,7 @@
    Work Itemが `accepted` 状態であることを確認する。受領前にQAを挟む運用があるかどうかはTBD（[approval-policy.md](../architecture/approval-policy.md)）。
 
 2. **QA依頼文書の草稿作成**
-   [templates/qa-request.md](../../templates/qa-request.md) を用いて、対象機能・関連する仕様書/Jiraタスク/実装（GitHub PR）へのリンク、テスト対象範囲を記載する。
+   [prompts/create-qa-request.md](../../prompts/create-qa-request.md) に従い、[templates/qa-request.md](../../templates/qa-request.md) を用いて、対象機能・関連する仕様書/Jiraタスク/実装（GitHub PR）へのリンク、テスト対象範囲を記載する。
 
 3. **テスト範囲・環境の明記**
    検証環境（ステージング等）・対象ブラウザ/デバイス・除外項目を明記する。具体的な環境情報・命名はTBD。
@@ -29,7 +29,7 @@
    Work Itemを `qa_requested` に遷移。
 
 6. **結果の反映**
-   QA結果に応じて `qa_passed` または `qa_failed` に遷移する。`qa_failed` 時の差し戻し先はTBD ([state-machine.md](../architecture/state-machine.md))。
+   QAチームの正式な結果記録への参照（[schemas/qa-result.schema.yaml](../../schemas/qa-result.schema.yaml)）を確認した上で、`qa_passed` または `qa_failed` に遷移する。QA結果の正本システムはTBDであり、現時点ではこの遷移の証跡を一意に検証できない。`qa_failed` 時の差し戻し先はTBD ([state-machine.md](../architecture/state-machine.md))。
 
 ## 入力/出力まとめ
 

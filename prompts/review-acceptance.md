@@ -14,7 +14,7 @@
 
 ## 手順
 
-1. 仕様書の `functional_requirements` (および該当すれば `non_functional_requirements`) を1件ずつ `checklist` の項目とする。
+1. 仕様書の `functional_requirements` (および該当すれば `non_functional_requirements`) を1件ずつ `checklist` の項目とし、`requirement_ref` には要件ID（`FR-001`等）を記載する。
 2. 各項目について、実装事実・受領原本を根拠に `met` / `not_met` / `partially_met` / `unclear` を判定する。判定根拠を `notes` に明記する。
 3. 仕様と成果物の間に差異がある場合、`discrepancies` に列挙する。差異の重大度（軽微か重大か）を自ら判定しない。
 4. `decision` は常に `pending` のまま出力する。`accepted` / `rejected` への変更は行わない（[docs/architecture/approval-policy.md](../docs/architecture/approval-policy.md) により人間が行う）。

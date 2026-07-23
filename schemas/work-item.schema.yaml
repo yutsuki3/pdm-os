@@ -81,6 +81,21 @@ properties:
         items:
           type: string
         description: "対応するGitHub上の実装事実 (PR/コミット/タグ)。単位の定義はTBD。"
+      requirement_ref:
+        type: string
+        description: 要求・要望記録への参照。原文の正本・保存先はTBD。
+      acceptance_report_ref:
+        type: string
+        description: 受領レポートへの参照。
+      qa_request_ref:
+        type: string
+        description: QA依頼への参照。送付記録の正本はTBD。
+      qa_result_ref:
+        type: string
+        description: QA結果の正式記録への参照。正本システムはTBD。
+      release_note_ref:
+        type: string
+        description: 公開済みリリースノートへの参照。公開先の正本はTBD。
 
   created_at:
     type: string

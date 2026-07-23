@@ -1,6 +1,7 @@
 <!--
 テンプレート: Jiraタスク草稿
 関連ワークフロー: docs/workflows/spec-to-jira.md
+対応スキーマ: schemas/jira-task.schema.yaml
 Jiraプロジェクトキー・課題タイプ体系・必須カスタムフィールドはTBD。
 このテンプレートはJira登録前の草稿として使う。
 -->

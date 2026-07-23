@@ -1,6 +1,6 @@
 <!--
 テンプレート: 要求・要望の記録
-対応スキーマ: なし (schemas/work-item.schema.yaml の requirement フィールドに要約される)
+対応スキーマ: schemas/requirement.schema.yaml
 関連ワークフロー: docs/workflows/requirement-to-spec.md
 -->
 

@@ -111,6 +111,11 @@
 | TBD-047 | 出所系統（オリジンのチェーン）のスキーマ表現 | knowledge-itemに重複・出所関係をどう持たせるか | [deduplication-policy.md](../architecture/deduplication-policy.md), [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-048 | 各スキーマのID採番ルール | work-item / specification 等のID体系 | [work-item.schema.yaml](../../schemas/work-item.schema.yaml), [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-049 | 非機能要件の必須項目範囲 | specification.schema.yaml の non_functional_requirements | [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
+| TBD-050 | QA結果の正本システム・結果記録形式 | `qa_passed` / `qa_failed` の根拠となるQA結果をどこに記録・参照するか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 要確認 |
+| TBD-051 | QA依頼の送付記録の正本 | `qa_requested` を確定する送付済み証跡をどこに残すか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 要確認 |
+| TBD-052 | 要求・要望原文の正本・保存先 | ステークホルダーの原要求をどこで正本として保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 要確認 |
+| TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | `released` の公開証跡と過去ノートをどこで保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 要確認 |
+| TBD-054 | 状態遷移履歴の記録先・最小項目 | 誰がいつ何を根拠に状態を確定したかをどこに残すか | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 要確認 |
 
 ## 更新履歴
 
