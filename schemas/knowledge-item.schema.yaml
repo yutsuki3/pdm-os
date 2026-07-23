@@ -1,0 +1,66 @@
+# Knowledge Item スキーマ
+#
+# Knowledge Agent (docs/agents/knowledge-agent.md) が検索結果として返す
+# 個々の知識アイテムの形式。複数のknowledge-itemの集合を「知識パック」と呼ぶ。
+# 例: examples/pilot-feature/knowledge-pack.yaml
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/knowledge-item.schema.yaml"
+title: KnowledgeItem
+type: object
+required:
+  - source_system
+  - title
+  - url
+properties:
+  source_system:
+    type: string
+    description: 出典システム。docs/architecture/source-of-truth.md のドメインに対応。
+    enum:
+      - notion
+      - confluence
+      - google_drive
+      - jira
+      - github
+
+  source_id:
+    type: string
+    description: 出典システム内でのID（ページID、ファイルID、課題キー等）。
+
+  title:
+    type: string
+    description: 出典ドキュメント・アイテムのタイトル。
+
+  url:
+    type: string
+    description: 出典への直接リンク。正本を辿れることを保証する。
+
+  excerpt:
+    type: string
+    description: 検索クエリに関連する抜粋・要約。
+
+  last_updated:
+    type: string
+    format: date-time
+    description: 出典側の最終更新日時。
+
+  relevance_score:
+    type: number
+    description: >
+      関連度スコア。算出方法は未確定 (TBD)。
+      現時点ではプレースホルダとして扱い、数値の意味を保証しない。
+
+  is_current_spec:
+    type: boolean
+    description: >
+      現行仕様(Notion由来)かどうかを明示するフラグ。
+      Confluence由来(過去仕様)との混同を防ぐための必須の区別。
+
+  conflict_notes:
+    type: string
+    description: 他のknowledge-itemと矛盾する場合の注記。自動解決はしない。
+
+# 未確定事項 (TBD):
+# - relevance_score の算出方法
+# - 各システムへの実際の検索アクセス手段 (API / エクスポートデータ)
+# - 検索結果の重複排除ルール

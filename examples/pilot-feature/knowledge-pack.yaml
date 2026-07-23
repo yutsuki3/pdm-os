@@ -1,0 +1,33 @@
+# これは架空のサンプルです。実在のページ・URLではありません。
+# schemas/knowledge-item.schema.yaml に準拠した knowledge-pack の例。
+# prompts/collect-knowledge.md の出力イメージ。
+
+- source_system: notion
+  source_id: "sample-page-001"
+  title: "通知設定 仕様書 (現行)"
+  url: "https://notion.example.com/notification-settings-spec"
+  excerpt: "現在は「全通知ON/OFF」の1トグルのみ実装されている。通知種別ごとの制御は未実装。"
+  last_updated: "2026-05-10T00:00:00Z"
+  relevance_score: null # 算出方法未確定 (TBD)。サンプルのためnull。
+  is_current_spec: true
+  conflict_notes: ""
+
+- source_system: confluence
+  source_id: "sample-page-002"
+  title: "2024年 通知機能改善検討"
+  url: "https://confluence.example.com/notification-improvement-2024"
+  excerpt: "2024年時点で種別ごとのON/OFFが検討されたが、実装優先度の都合で見送られた経緯がある。"
+  last_updated: "2024-11-01T00:00:00Z"
+  relevance_score: null
+  is_current_spec: false
+  conflict_notes: "現行仕様(Notion)には見送りの経緯自体は記載されていない。過去の意思決定ログの所在はTBD。"
+
+- source_system: jira
+  source_id: "SAMPLE-88"
+  title: "[過去チケット] 通知種別ごとのON/OFF (見送り)"
+  url: "https://jira.example.com/browse/SAMPLE-88"
+  excerpt: "2024年に一度起票されたが、Won't Doでクローズ。理由欄はTBD（サンプルデータのため詳細なし）。"
+  last_updated: "2024-11-15T00:00:00Z"
+  relevance_score: null
+  is_current_spec: false
+  conflict_notes: ""

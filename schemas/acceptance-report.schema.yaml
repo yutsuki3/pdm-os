@@ -1,0 +1,78 @@
+# Acceptance Report スキーマ
+#
+# Acceptance Agent (docs/agents/acceptance-agent.md) が作成する
+# 受領判断材料の構造。templates/qa-request.md や release-note.md からも参照される。
+# 最終的な受領判断 (decision) は人間が行う。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/acceptance-report.schema.yaml"
+title: AcceptanceReport
+type: object
+required:
+  - work_item_id
+  - specification_id
+  - checklist
+  - decision
+properties:
+  work_item_id:
+    type: string
+    description: 対応する work-item.schema.yaml の id。
+
+  specification_id:
+    type: string
+    description: 対応する specification.schema.yaml の id。
+
+  deliverables:
+    type: object
+    properties:
+      github_refs:
+        type: array
+        items:
+          type: string
+        description: "実装事実として参照したGitHub上のPR/コミット/タグ。単位の定義はTBD。"
+      google_drive_file_ids:
+        type: array
+        items:
+          type: string
+        description: 受領原本として参照したGoogle Drive上のファイル。特定方法はTBD。
+
+  checklist:
+    type: array
+    description: 仕様書の各要件に対する充足状況。
+    items:
+      type: object
+      required: [requirement_ref, status]
+      properties:
+        requirement_ref:
+          type: string
+          description: specification.functional_requirements 等の項目への参照。
+        status:
+          type: string
+          enum: [met, not_met, partially_met, unclear]
+        notes:
+          type: string
+
+  discrepancies:
+    type: array
+    items:
+      type: string
+    description: 仕様と成果物の差異一覧。Acceptance Agentは重大度を独断で判定しない。
+
+  decision:
+    type: string
+    enum: [pending, accepted, rejected]
+    description: 最終判断。pending以外への変更は人間 (PdM/PO) が行う。
+
+  decided_by:
+    type: string
+    description: 判断者。docs/architecture/approval-policy.md によりTBD。
+
+  decided_at:
+    type: string
+    format: date-time
+
+# 未確定事項 (TBD):
+# - GitHub実装事実の単位の定義
+# - Google Drive受領原本の特定方法
+# - checklist の判定基準 (partially_met の扱い等)
+# - decided_by の役職・権限要件

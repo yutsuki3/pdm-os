@@ -1,0 +1,96 @@
+# Work Item スキーマ
+#
+# 1つの要求・要望が要件化され、仕様化・実装・受領・リリースされるまでの
+# 単位を表す。状態遷移の詳細は docs/architecture/state-machine.md を参照。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/work-item.schema.yaml"
+title: WorkItem
+type: object
+required:
+  - id
+  - title
+  - state
+  - created_at
+properties:
+  id:
+    type: string
+    description: Work Item の一意識別子。採番ルールはTBD。
+
+  title:
+    type: string
+    description: 要求・要望・機能を短く表すタイトル。
+
+  state:
+    type: string
+    description: 現在の状態。docs/architecture/state-machine.md の状態一覧に対応。
+    enum:
+      - requested
+      - requirement_defined
+      - spec_drafting
+      - spec_review
+      - spec_approved
+      - jira_tasks_created
+      - in_progress
+      - delivered
+      - acceptance_review
+      - accepted
+      - rejected
+      - qa_requested
+      - qa_passed
+      - qa_failed
+      - release_note_drafting
+      - released
+
+  owner:
+    type: string
+    description: 担当PdM/POの識別子。命名規則(メールアドレス/ユーザーIDなど)はTBD。
+
+  requirement:
+    type: object
+    description: templates/requirement.md に対応する要件情報への参照。
+    properties:
+      source_note:
+        type: string
+        description: 要求・要望の出所（誰から、どのチャネルか）。
+
+  links:
+    type: object
+    description: 各正本システム上の対応リソースへのリンク集。docs/architecture/source-of-truth.md 参照。
+    properties:
+      notion_spec_url:
+        type: string
+        description: Notion上の仕様書ページURL（正本）。
+      confluence_urls:
+        type: array
+        items:
+          type: string
+        description: 参照した過去仕様のConfluenceページURL一覧。
+      google_drive_file_ids:
+        type: array
+        items:
+          type: string
+        description: 受領原本・関連Google Docsのファイル一覧。
+      jira_issue_keys:
+        type: array
+        items:
+          type: string
+        description: 分解されたJiraタスクのキー一覧。
+      github_refs:
+        type: array
+        items:
+          type: string
+        description: "対応するGitHub上の実装事実 (PR/コミット/タグ)。単位の定義はTBD。"
+
+  created_at:
+    type: string
+    format: date-time
+
+  updated_at:
+    type: string
+    format: date-time
+
+# 未確定事項 (TBD):
+# - id の採番ルール
+# - owner の識別子形式
+# - 状態遷移の履歴(誰が・いつ・なぜ遷移させたか)を本スキーマに含めるかどうか

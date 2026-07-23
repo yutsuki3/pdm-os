@@ -1,0 +1,97 @@
+# Specification スキーマ
+#
+# Specification Agent (docs/agents/specification-agent.md) が作成する
+# 仕様書草稿の構造。templates/specification.md はこのスキーマを
+# 人間が読み書きしやすい形にしたもの。正本はNotion (ADR-0001参照)。
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "pdm-os/schemas/specification.schema.yaml"
+title: Specification
+type: object
+required:
+  - id
+  - title
+  - related_work_item_id
+  - status
+properties:
+  id:
+    type: string
+    description: 仕様書の一意識別子。採番ルールはTBD。
+
+  title:
+    type: string
+
+  related_work_item_id:
+    type: string
+    description: 対応する work-item.schema.yaml の id。
+
+  status:
+    type: string
+    enum: [draft, in_review, approved]
+    description: docs/architecture/state-machine.md の spec_drafting/spec_review/spec_approved に対応。
+
+  source_url:
+    type: string
+    description: >
+      Notion上の正本ページURL。statusがapprovedの場合は必須
+      （草稿段階では未反映のため空でもよい）。
+
+  background:
+    type: string
+    description: 要求・要望の背景、要件の要約。
+
+  goals:
+    type: array
+    items:
+      type: string
+    description: この仕様で達成すること。
+
+  non_goals:
+    type: array
+    items:
+      type: string
+    description: この仕様で扱わないこと。
+
+  functional_requirements:
+    type: array
+    items:
+      type: string
+
+  non_functional_requirements:
+    type: array
+    items:
+      type: string
+    description: 性能・可用性・セキュリティ等。項目の必須範囲はTBD。
+
+  wireflow_ref:
+    type: string
+    description: 対応するワイヤーフロー資料への参照 (templates/wireflow.md 準拠)。
+
+  open_questions:
+    type: array
+    items:
+      type: string
+    description: 未解決の論点。TBD項目はここに列挙する。
+
+  referenced_knowledge_items:
+    type: array
+    items:
+      type: string
+    description: 参照した knowledge-item の source_id / url 一覧。
+
+  approvals:
+    type: array
+    items:
+      type: object
+      properties:
+        approver:
+          type: string
+          description: 承認者。docs/architecture/approval-policy.md によりTBD。
+        approved_at:
+          type: string
+          format: date-time
+
+# 未確定事項 (TBD):
+# - id の採番ルール
+# - non_functional_requirements の必須範囲
+# - approvals.approver の具体的な役職・人数要件
