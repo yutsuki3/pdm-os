@@ -9,7 +9,11 @@ required: [draft_id, work_item_id, specification_id, title, summary, acceptance_
 properties:
   draft_id:
     type: string
-    description: Jira登録前の草稿を識別するID。採番規則はTBD。jira_issue_keyとは区別する。
+    minLength: 1
+    pattern: '^[A-Za-z0-9][A-Za-z0-9._-]*$'
+    description: >
+      Jira登録前の草稿を識別するID。英数字で始め、英数字・ハイフン・アンダースコア・ドットだけを使用する。
+      生成する同一タスク草稿リスト内で一意にする。採番主体・採番規則はTBD。jira_issue_keyとは区別する。
   work_item_id:
     type: string
   specification_id:

@@ -7,6 +7,7 @@
 - `未着手`: まだ検討されていない
 - `検討中`: 部分的に方針はあるが未確定
 - `要確認`: ユーザー・関係者への確認が必要
+- `実案件未検証`: ダミー検証では確認済みだが、実案件・正本システムでの運用検証が未実施
 - `実案件未検証`: Schema・テンプレート上の定義は追加済みで、ダミーデータでの再現も確認できているが、実案件・実システムでの運用検証がまだ行われていない
 
 ## 1. 正本・情報管理
@@ -126,9 +127,9 @@
 | TBD-056 | 仕様書とワイヤーフロー作成の往復要否 | ワイヤーフロー作成時に仕様書に無い論点（種別粒度等）が新たに見つかった場合の往復ルールが未定義 | [templates/wireflow.md](../../templates/wireflow.md), [prompts/create-specification.md](../../prompts/create-specification.md) | 未着手 |
 | TBD-057 | ドライラン用IDと実案件用IDの命名規則 | `WI-PILOT-xxx` のような仮採番と実案件IDの区別方法 | [work-item.schema.yaml](../../schemas/work-item.schema.yaml)（TBD-048関連） | 未着手 |
 | TBD-058 | デザインタスクの受け入れ条件がワイヤーフロー画面IDを参照する場合の表現 | `trace_refs` に `source_type` / `source_ref` / `item_ref` を追加し、仕様書要件（FR-001等）とワイヤーフロー画面（S2等）の両方を参照可能にした。ダミーパイプライン再実行（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)、JT-SAMPLE-001）で意図どおり機能することを確認 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml), [templates/jira-task.md](../../templates/jira-task.md), [examples/pilot-feature/jira-tasks/JT-SAMPLE-001-design.md](../../examples/pilot-feature/jira-tasks/JT-SAMPLE-001-design.md) | 実案件未検証 |
-| TBD-059 | Jira未登録の草稿タスク同士の依存関係参照方法 | `draft_id` と構造化した `dependency_refs` を追加し、草稿段階は `jira_task_draft` + `draft_id`、登録後は `jira_issue` + 課題キーで参照できるようにした。ダミーパイプライン再実行（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)、JT-SAMPLE-002〜004）で意図どおり機能することを確認。採番規則自体は引き続き未確定 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml), [templates/jira-task.md](../../templates/jira-task.md) | 実案件未検証 |
+| TBD-059 | Jira未登録の草稿タスク同士の依存関係参照方法 | `draft_id` と構造化した `dependency_refs` を追加し、草稿段階は `jira_task_draft` + `draft_id`、登録後は `jira_issue` + 課題キーで参照できるようにした。`draft_id` の許容文字と同一草稿リスト内の一意性もSchema・テンプレート・プロンプトに反映済み。採番主体・全体採番規則と実案件での検証は未確定 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml), [templates/jira-task.md](../../templates/jira-task.md), [decompose-tasks.md](../../prompts/decompose-tasks.md) | 実案件未検証 |
 | TBD-060 | 一部工程だけを仮定してパイプラインを検証する型の未整備 | `validation-run` のSchema・テンプレート・ドライラン用プロンプトを追加し、仮定と実際の記録を併記する形式を定義した。ダミーパイプライン再実行（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)）で、テスト前提を一箇所に集約して表現できることを確認 | [validation-run.schema.yaml](../../schemas/validation-run.schema.yaml), [run-validation-dry-run.md](../../prompts/run-validation-dry-run.md), [examples/pilot-feature/validation-run-002.md](../../examples/pilot-feature/validation-run-002.md) | 実案件未検証 |
-| TBD-061 | Markdown成果物とSchemaの機械検証方法 | 現行テンプレートは人間が読み書きするMarkdownであり、対応Schemaへの自動検証入力（YAML/JSON、front matter、変換器等）が未定義。今回もvalidation-run-002.mdを含め目視確認のみで、機械検証は行えていない | [artifact-contracts.md](../architecture/artifact-contracts.md), [schemas/](../../schemas/) | 未着手（Codex検討事項） |
+| TBD-061 | Markdown成果物とSchemaの機械検証方法 | 現行テンプレートは人間が読み書きするMarkdownであり、対応Schemaへの自動検証入力（YAML/JSON、front matter、変換器等）が未定義。今回もvalidation-run-002.mdを含め目視確認のみで、機械検証は行えていない。【提案】テンプレート本文を維持したまま、必要項目だけをYAML front matterへ重複なく構造化し、JSON Schema検証入力にする方式を次の検討候補とする | [artifact-contracts.md](../architecture/artifact-contracts.md), [schemas/](../../schemas/) | 検討中（提案あり・未実装） |
 
 ## 更新履歴
 
@@ -137,3 +138,4 @@
 - 追記: 同ドライラン第2部（フルパイプライン・ダミー検証、Jiraタスク〜リリースノート）実施に伴い、TBD-058〜060を追加。
 - 更新: CodexレビューによりTBD-058〜060の再利用定義を追加。実案件での運用検証が完了するまで検討中とする。TBD-061を追加。
 - 更新: 新形式（draft_id / trace_refs / dependency_refs / validation-run）を使ってダミーパイプラインを再実行し（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)）、TBD-058〜060の定義がダミーデータ上で機能することを確認。ステータスを`実案件未検証`に統一（実案件・実システムでの運用検証が残タスクであることを明示）。
+- 更新: Round 2のCodexレビューにより、`draft_id` の形式・同一草稿リスト内の一意性、検証用仮定の実記録参照必須を定義へ反映。TBD-061に機械検証方式の提案を追記。

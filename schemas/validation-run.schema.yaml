@@ -40,7 +40,7 @@ properties:
     description: 検証だけのために置く前提。実際の承認・状態・送付・公開を変更しない。
     items:
       type: object
-      required: [id, statement, applies_to]
+      required: [id, statement, applies_to, actual_record_ref]
       properties:
         id:
           type: string
