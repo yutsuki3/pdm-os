@@ -22,6 +22,7 @@
 - [acceptance.md](workflows/acceptance.md) — 成果物の受領判断
 - [qa-request.md](workflows/qa-request.md) — QA依頼作成
 - [release-note.md](workflows/release-note.md) — リリースノート作成
+- [pilot-core-flow.md](workflows/pilot-core-flow.md) — 実案件でのコアフローパイロット手順
 
 ## agents — エージェント定義
 

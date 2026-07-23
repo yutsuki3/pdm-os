@@ -62,7 +62,7 @@ pdm-os/
 3. [docs/architecture/overview.md](docs/architecture/overview.md) — 全体構成
 4. [docs/architecture/source-of-truth.md](docs/architecture/source-of-truth.md) / [docs/architecture/deduplication-policy.md](docs/architecture/deduplication-policy.md) / [docs/architecture/artifact-contracts.md](docs/architecture/artifact-contracts.md) — 正本・重複排除・成果物契約
 5. [docs/architecture/state-machine.md](docs/architecture/state-machine.md) / [docs/architecture/approval-policy.md](docs/architecture/approval-policy.md) — 状態遷移と承認ポイント
-6. [docs/workflows/](docs/workflows/) — 業務フロー別の詳細（要件からリリースまで）
+6. [docs/workflows/](docs/workflows/) — 業務フロー別の詳細（要件からリリースまで）。初回検証は [pilot-core-flow.md](docs/workflows/pilot-core-flow.md) を参照
 7. [docs/agents/](docs/agents/) — エージェントの役割、[ai-tool-roles.md](docs/agents/ai-tool-roles.md) — Claude/Codex/Gemini/Notion AIの暫定役割分担
 8. [schemas/](schemas/) / [templates/](templates/) / [prompts/](prompts/) — 実体となるデータ定義
 
