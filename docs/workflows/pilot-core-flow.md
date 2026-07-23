@@ -52,7 +52,7 @@
 1. PdM/POが要求原文の参照、Work Item ID、検索してよい正本の範囲をClaude Codeに渡す。
 2. Claude Codeが [collect-knowledge.md](../../prompts/collect-knowledge.md) に従い、知識パックを草稿化する。出所不明・矛盾・未確認事項は推測せず記録する。
 3. Claude Codeが [create-specification.md](../../prompts/create-specification.md) に従い、仕様書草稿と必要なワイヤーフロー草稿を作成する。
-4. 人間が要件・仕様書草稿をレビューする。承認者・基準・正式反映方法は既存の `TBD` に従い、このパイロットで勝手に確定しない。
+4. 人間が要件・仕様書草稿をレビューする。承認者・基準は [approval-policy.md](../architecture/approval-policy.md) の確定内容（PdM/PO単独）に従う。Notionへの正式反映方法は既存の `TBD` に従い、このパイロットで勝手に確定しない。
 5. 人間が承認済み仕様書を明示した場合に限り、Claude Codeが [decompose-tasks.md](../../prompts/decompose-tasks.md) に従いJiraタスク草稿を作成する。
 6. PdM/POが、成果物の完全性・参照の追跡可能性・TBDの妥当性を確認する。Jiraへの登録は人間が行う。
 

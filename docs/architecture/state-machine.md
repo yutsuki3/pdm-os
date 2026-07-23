@@ -12,7 +12,7 @@ Work Item ([schemas/work-item.schema.yaml](../../schemas/work-item.schema.yaml))
 | `requirement_defined` | 要件として整理・合意された | PdM/PO (Orchestrator支援) |
 | `spec_drafting` | 仕様書・ワイヤーフローを草稿中 | Specification Agent |
 | `spec_review` | 仕様書がレビュー中 | PdM/PO, 関係者 |
-| `spec_approved` | 仕様書が承認された（Notionへ反映） | PdM/PO (承認者はTBD) |
+| `spec_approved` | 仕様書が承認された（Notionへ反映） | PdM/PO単独 |
 | `jira_tasks_created` | 仕様書からJiraのデザイン・実装タスクへ分解済み | Specification Agent, Orchestrator |
 | `in_progress` | Jira上でタスクが進行中 | デザイナー/エンジニア (Jira側で管理) |
 | `delivered` | 実装・デザイン成果物が提出された | エンジニア/デザイナー |
@@ -57,26 +57,25 @@ stateDiagram-v2
 
 | 遷移 | 開始条件（前状態で確認するもの） | 完了条件・遷移証跡 | 状態を確定する主体 |
 |---|---|---|---|
-| `requested` → `requirement_defined` | 要求・要望の記録がある | 要件の合意記録。承認者・基準・記録先: `TBD` | 人間（TBD） |
+| `requested` → `requirement_defined` | 要求・要望の記録がある | 要件の合意記録（背景・目的・受け入れ条件が明文化されていること）。Notion上のプロパティに記録 | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
 | `requirement_defined` → `spec_drafting` | 合意済み要件とWork Item参照がある | 仕様書草稿の作成を開始した記録 | Orchestratorは提案のみ。実行形態: `TBD` |
 | `spec_drafting` → `spec_review` | 仕様書草稿、必要な場合はワイヤーフロー草稿 | レビューに提示できる草稿。ワイヤーフローが必須となる条件: `TBD` | 人間がレビュー開始を確認 |
 | `spec_review` → `spec_drafting` | レビューで修正が必要 | 修正要求と対象草稿への参照。記録形式: `TBD` | 人間 |
-| `spec_review` → `spec_approved` | レビュー対象の仕様書草稿 | 人間の承認記録とNotion正本URL | 人間（承認者・基準: `TBD`） |
+| `spec_review` → `spec_approved` | レビュー対象の仕様書草稿 | 人間の承認記録（必須項目・非機能要件・ワイヤーフローが明記済み）とNotion正本URL。Notion上のプロパティに記録 | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
 | `spec_approved` → `jira_tasks_created` | 承認済みNotion仕様書 | Jira課題が作成され、仕様書・Work Itemと相互リンク済み | 人間が登録・確認 |
 | `jira_tasks_created` → `in_progress` | Jira課題が存在する | 作業開始のJira状態。Work Itemへの集約規則: `TBD` | Jira情報を人間が確認 |
 | `in_progress` → `delivered` | 配下の作業が完了報告された | 成果物（GitHub/Drive）への参照。完了判定・集約規則: `TBD` | 人間が確認 |
 | `delivered` → `acceptance_review` | 承認済み仕様書、GitHub実装、Drive受領原本を特定できる | 受領レポート草稿 | Acceptance Agentは草稿作成のみ |
-| `acceptance_review` → `accepted` / `rejected` | 受領レポートと差異一覧 | 人間の判断記録（`decision`、判断者、日時） | 人間（承認者・基準: `TBD`） |
+| `acceptance_review` → `accepted` / `rejected` | 受領レポートと差異一覧 | 人間の判断記録（`decision`、判断者、日時）。Notion上のプロパティに記録。軽微な差異は記録の上で受領。「軽微」の線引き基準は `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
 | `rejected` → 戻り先 | 差し戻し理由 | 戻り先（`requirement_defined` / `spec_drafting` / `in_progress` 等）の選択。**遷移先と基準: `TBD`** | 人間 |
-| `accepted` → `qa_requested` | QA依頼草稿と受領済み成果物 | QA依頼の実送付記録。送付先・正本: `TBD` | 人間 |
+| `accepted` → `qa_requested` | QA依頼草稿と受領済み成果物 | QA依頼の実送付記録。受領した機能は例外なく常にQAへ送付する（スキップ規定なし）。送付先・正本: `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
 | `qa_requested` → `qa_passed` / `qa_failed` | QA依頼送付済み | QAチームの正式な結果記録への参照。結果の正本: `TBD` | QAチームの結果を人間が反映 |
 | `qa_failed` → 戻り先 | QA不合格結果・指摘への参照 | 戻り先と再依頼条件。**いずれも `TBD`** | 人間 |
 | `qa_passed` → `release_note_drafting` | QA合格結果への参照 | リリースノート草稿 | Release Agentは草稿作成のみ |
-| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録と公開先への参照 | 人間（承認者・公開先: `TBD`） |
+| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録（QA合格 + リリースノート内容確認 + リスク確認）。Notion上のプロパティに記録。公開先への参照は `TBD` | 人間（会議体: PdM/PO + エンジニアリード + QAリード、[approval-policy.md](approval-policy.md)） |
 
 ## 未確定事項
 
-- `spec_review` → `spec_approved` の承認者・承認条件は TBD ([approval-policy.md](approval-policy.md) 参照)。
 - `rejected` / `qa_failed` からの差し戻し先が常に `in_progress` でよいか（`requirement_defined` / `spec_drafting` に戻すケースがあるか）はTBD。戻り先は図に示しておらず、確定した遷移規則ではない。
 - 1つのWork Itemが複数のJiraタスクに分解された場合、それぞれの進捗をどうWork Item全体の状態に集約するかはTBD。
 - 状態遷移をJiraのステータスと自動同期するか、PdM OS独自に管理するかはTBD。

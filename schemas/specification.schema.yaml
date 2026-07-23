@@ -109,7 +109,7 @@ properties:
       properties:
         approver:
           type: string
-          description: 承認者。docs/architecture/approval-policy.md によりTBD。
+          description: 承認者。docs/architecture/approval-policy.md により PdM/PO単独。
         approved_at:
           type: string
           format: date-time
