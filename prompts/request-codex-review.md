@@ -6,14 +6,18 @@
 
 Claude Codeが実施したパイロットのダミーデータ検証結果をCodexにレビューさせ、Schema・テンプレート・文書間の整合性を確認・具体化する。同一ファイルを繰り返しのレビュー依頼に使い回す。中身は毎回の状況に合わせて更新し、[レビュー履歴](#レビュー履歴)に前回までの経緯を残す。
 
-## 前提（第2回時点）
+## 前提（Round 2完了時点）
 
-- 実案件・正本システムへの検索許可がまだ無いため、実データでのパイロットは未実施。
-- 第1回レビュー（Round 1）でCodexが `jira-task.schema.yaml`（`draft_id` / `trace_refs` / 構造化された `dependency_refs`）と `validation-run.schema.yaml` / [run-validation-dry-run.md](run-validation-dry-run.md) を追加した。
-- Claude Codeがこれらの新形式を使って同じダミーパイプラインを再実行し、[examples/pilot-feature/validation-run-002.md](../examples/pilot-feature/validation-run-002.md) として記録した。Jiraタスク草稿4件（`examples/pilot-feature/jira-tasks/*.md`）も新形式に更新済み。
-- [tbd-register.md](../docs/decisions/tbd-register.md) のTBD-058〜060は、ダミーデータでの機能確認が完了した段階として `実案件未検証` ステータスに更新した。TBD-061（Markdown成果物とSchemaの機械検証方法）は未着手のまま。
+- 実案件・正本システムへの検索許可がまだ無いため、実データでのパイロットは未実施。引き続き開始しない。
+- Round 1でCodexが `jira-task.schema.yaml`（`draft_id` / `trace_refs` / 構造化された `dependency_refs`）と `validation-run.schema.yaml` / [run-validation-dry-run.md](run-validation-dry-run.md) を追加した。
+- Claude Codeがこれらの新形式を使ってダミーパイプラインを再実行し、[examples/pilot-feature/validation-run-002.md](../examples/pilot-feature/validation-run-002.md) として記録した。
+- Round 2でCodexが `draft_id` の許容文字・一意性制約、`validation-run` の `actual_record_ref` 必須化、TBD-061への提案（YAML front matter方式、未実装）を追加した。ユーザーがこれらの結果を確認し、Round 2完了と判定した。
+- [tbd-register.md](../docs/decisions/tbd-register.md) のTBD-058〜060は `実案件未検証` のまま維持。TBD-061は `検討中（提案あり・未実装）`。いずれも方式の確定・実装はまだ行わない。
+- 既存のダミー成果物（`examples/pilot-feature/` 配下）は、Round 2の定義変更に対して適合済みであることを確認済み。業務上の理由での変更はしない。
 
-## Codexへの実行プロンプト
+## Codexへの実行プロンプト（次回更新待ち）
+
+Round 3の具体的な依頼内容はまだPdM/POから指示されていない。以下はRound 2で使ったプロンプトを土台としたテンプレート。次回依頼する際は、背景・まず読んでほしいもの・依頼内容を最新の状況に合わせて更新してから使う。
 
 ```text
 PdM OS設計リポジトリ（pdm-os）で、Claude Codeが実施したパイロットのダミーデータ検証結果（2回目）をレビューしてください。
@@ -58,4 +62,5 @@ PdM OS設計リポジトリ（pdm-os）で、Claude Codeが実施したパイロ
 ## レビュー履歴
 
 - Round 1（2026-07-23）: TBD-058〜060の発見を受けてレビュー依頼。Codexが jira-task.schema.yaml（draft_id/trace_refs/dependency_refs）と validation-run 一式（schema/template/prompt）を追加。TBD-061を新規発見。
-- Round 2（2026-07-23）: Round 1の修正を使ってダミーパイプラインを再実行した結果（validation-run-002.md）のレビューを依頼。TBD-058〜060の「実案件未検証」ステータスの妥当性確認、TBD-059の採番規則・TBD-061への提案を依頼中。
+- Round 2（2026-07-23、完了）: Round 1の修正を使ってダミーパイプラインを再実行した結果（validation-run-002.md）のレビューを依頼。Codexが `draft_id` の許容文字・一意性制約、`validation-run` の `actual_record_ref` 必須化を追加し、TBD-061にYAML front matter方式の提案（未実装）を追記。ユーザーが結果を確認し、TBD-058〜060は「実案件未検証」のまま維持で妥当と判定。既存のダミー成果物は変更不要と確認。
+- Round 3（未実施）: 依頼内容は未定。着手条件・トリガーはPdM/POの指示待ち。候補としては、TBD-061（front matter方式）の具体化検討、または実案件パイロット開始の準備状況の再確認などが考えられるが、いずれも未確定であり推測で先取りしない。
