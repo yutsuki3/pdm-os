@@ -1,10 +1,12 @@
 <!--
 これは架空のサンプルです。実在の組織・製品・Jira課題とは関係ありません。
 【テスト用】仕様書「テスト用仮承認」前提のダミー検証成果物。実際の承認ではない。
+【再検証】draft_id / trace_refs / dependency_refs（構造化）形式に更新。
 -->
 
 # Jiraタスク草稿: 設定変更の即時反映実装 (FR-002)
 
+- 草稿ID: JT-SAMPLE-003
 - 対応仕様書: SPEC-SAMPLE-001
 - 課題タイプ: Implementation（TBD — 体系未確定）
 - プロジェクトキー: TBD
@@ -18,13 +20,15 @@ FR-002「設定変更は即時反映される」を実装する。
 ## 受け入れ条件 (Acceptance Criteria)
 
 - [ ] FR-002: トグル変更後、ページ再読み込みなしに設定が反映される（暫定解釈。正式な定義はTBD）
+  - 根拠: source_type: specification, source_ref: SPEC-SAMPLE-001, item_ref: FR-002
 - [ ] 反映の失敗時の挙動（エラー表示等）は wireflow.md のオープンクエスチョンと合わせて別途確認する
+  - 根拠: source_type: wireflow, source_ref: `wireflow.md`(SPEC-SAMPLE-001), item_ref: S2（オープンクエスチョン欄）
 
 ## 関連リンク
 
 - 仕様書 (Notion): TBD（本サンプルでは未反映）
 - 親Work Item: WI-SAMPLE-001
-- 依存する他タスク: JT-SAMPLE-002（トグルUI実装と合わせて実装する想定）
+- 依存する他タスク: jira_task_draft / JT-SAMPLE-002（トグルUI実装と合わせて実装する想定）
 
 ## 見積り
 

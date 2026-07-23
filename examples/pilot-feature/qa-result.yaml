@@ -2,6 +2,7 @@
 # schemas/qa-result.schema.yaml に準拠したQA結果参照の例。
 # 【テスト用】フルパイプライン・ダミー検証の一部。QA結果の正本システムはTBD-050のため、
 # result_ref は実在しない参照であることを明示する。実際のQA実施・合否判定ではない。
+# 対応する仮定: validation-run-002.md の ASSUMPTION-003。
 
 work_item_id: "WI-SAMPLE-001"
 outcome: "passed" # テスト用ダミー。実際のQAは実施していない。

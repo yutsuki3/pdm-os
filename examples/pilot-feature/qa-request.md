@@ -14,7 +14,7 @@ acceptance-report.md の decision は実際には pending のままだが、
 - 依頼日: 2026-07-23
 - 依頼者 (PdM/PO): サンプル太郎（架空）
 
-【テスト用注記】対応する [acceptance-report.md](acceptance-report.md) の `decision` は実際には `pending`（FR-002, FR-003に `unclear` / `partially_met` の判定あり）。本検証では、パイプライン後続工程（QA依頼〜リリースノート）の成果物契約を確認する目的に限り、テスト用に「仮でaccepted」として扱う。実際の受領判断ではない。
+【テスト用注記】対応する [acceptance-report.md](acceptance-report.md) の `decision` は実際には `pending`（FR-002, FR-003に `unclear` / `partially_met` の判定あり）。本検証では、パイプライン後続工程（QA依頼〜リリースノート）の成果物契約を確認する目的に限り、テスト用に「仮でaccepted」として扱う。実際の受領判断ではない。この仮定は [validation-run-002.md](validation-run-002.md) の ASSUMPTION-002 として構造化して記録している。
 
 ## 対象機能の概要
 
@@ -23,7 +23,7 @@ acceptance-report.md の decision は実際には pending のままだが、
 ## 関連リンク
 
 - 仕様書 (Notion): TBD（本サンプルでは未反映）
-- Jiraタスク: JT-SAMPLE-001〜004（草稿段階。実際のJira課題キーは未登録のためTBD）
+- Jiraタスク: draft_id JT-SAMPLE-001〜004（草稿段階。実際のJira課題キーは未登録のためTBD）
 - 実装 (GitHub PR): `example-org/example-repo#123`（架空、acceptance-report.md と同一参照）
 - 受領レポート: [acceptance-report.md](acceptance-report.md)（前述のとおり実際は `pending`）
 
