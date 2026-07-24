@@ -6,14 +6,14 @@
 
 | 成果物 | 作成者 | 主な入力 | 構造 | 正本 / 扱い | 次の利用者 |
 |---|---|---|---|---|---|
-| 要求・要望記録 | PdM/PO | ステークホルダーの発話・依頼 | [requirement.schema.yaml](../../schemas/requirement.schema.yaml) / [requirement.md](../../templates/requirement.md) | 原文の外部正本・保存先: `TBD`。リポジトリ内の例・草稿は正本でない | Knowledge Agent, Specification Agent |
+| 要求・要望記録 | PdM/PO | ステークホルダーの発話・依頼 | [requirement.schema.yaml](../../schemas/requirement.schema.yaml) / [requirement.md](../../templates/requirement.md) | 原文の正本は依頼チャネル（Slackスレッド等）自体（決定）。テンプレートは要約であり正本でない | Knowledge Agent, Specification Agent |
 | 知識パック | Knowledge Agent | 要件・検索クエリ・外部正本の検索結果 | [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) のリスト | 各アイテムの正本は `source_system` の参照先。知識パック自体は中間成果物 | Specification Agent, Acceptance Agent |
 | 仕様書 | Specification Agent（草稿） | 要件、知識パック | [specification.schema.yaml](../../schemas/specification.schema.yaml) / [specification.md](../../templates/specification.md) | 承認後の正本はNotion。草稿は中間成果物 | PdM/PO、Specification Agent（タスク分解）、Acceptance Agent |
-| ワイヤーフロー | Specification Agent（草稿） | 仕様書草稿 | [wireflow.schema.yaml](../../schemas/wireflow.schema.yaml) / [wireflow.md](../../templates/wireflow.md) | 正式ツール・正本・同期方法: `TBD` | 仕様書レビュー、Jiraタスク分解 |
+| ワイヤーフロー | Specification Agent（草稿） | 仕様書草稿 | [wireflow.schema.yaml](../../schemas/wireflow.schema.yaml) / [wireflow.md](../../templates/wireflow.md) | 正式ツールはFigma。画面一覧・詳細遷移の正本はFigma（決定）。本成果物は概要とFigma URLへの参照のみ | 仕様書レビュー、Jiraタスク分解 |
 | Jiraタスク草稿 | Specification Agent | 承認済み仕様書 | [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml) / [jira-task.md](../../templates/jira-task.md) | 登録後のJira課題・状態の正本はJira。草稿は中間成果物 | PdM/PO、Jira |
 | 受領レポート | Acceptance Agent（草稿） | 承認済み仕様書、GitHub実装、Drive受領原本 | [acceptance-report.schema.yaml](../../schemas/acceptance-report.schema.yaml) | GitHub/Google Driveへの参照に基づく判断材料。最終判断は人間 | PdM/PO、Release Agent |
-| QA依頼 | Release Agent（草稿） | `accepted` のWork Item、受領レポート、関連参照 | [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) / [qa-request.md](../../templates/qa-request.md) | 送付先・送付記録の正本: `TBD` | PdM/PO、QAチーム |
-| QA結果参照 | QAチーム（記録主体はTBD） | QA実施結果 | [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | **QA結果の正本システムは未割当 (`TBD`)**。このSchemaは正式記録への参照のみを表す | Orchestrator、Release Agent |
+| QA依頼 | Release Agent（草稿） | `accepted` のWork Item、受領レポート、関連参照 | [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) / [qa-request.md](../../templates/qa-request.md) | 送付先はチャットツール（例: Slack）。送付記録の正本は送付メッセージへのリンク（決定） | PdM/PO、QAチーム |
+| QA結果参照 | QAチーム | QA実施結果 | [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | **QA結果の正本はQAチームが送付したチャットメッセージ（Slack等）（決定）**。このSchemaはそのメッセージへの参照のみを表す | Orchestrator、Release Agent |
 | リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | アーカイブ先はNotion（決定）。公開チャネルの具体形式は `TBD` | PdM/PO、公開先 |
 | 検証実施記録 | パイロット実施者 | 対象成果物、テスト用の仮定 | [validation-run.schema.yaml](../../schemas/validation-run.schema.yaml) / [validation-run.md](../../templates/validation-run.md) | パイプラインの検証記録。業務上の承認・状態の正本ではない | PdM/PO、設計レビュー担当 |
 
@@ -27,6 +27,5 @@
 
 ## 未確定事項
 
-- QA結果の正本システム、結果記録の形式、QA不合格時の戻り先。
-- 要求原文、ワイヤーフロー、QA依頼送付記録、リリースノート公開記録の正本・保存先。
+- リリースノート公開チャネルの具体形式。
 - 成果物IDと要件IDの採番規則、状態遷移履歴の保管先。

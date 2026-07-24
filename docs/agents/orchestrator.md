@@ -30,7 +30,10 @@ Work Itemの状態 ([schemas/work-item.schema.yaml](../../schemas/work-item.sche
 - 各機能別エージェントへの呼び出し（内部的な処理）
 - 状態遷移の提案（人間の承認により確定）
 
+## 複数Work Itemの優先順位（決定）
+
+【決定】複数Work Itemを並行して扱う際の優先順位は、[templates/requirement.md](../../templates/requirement.md) で要求段階に付与した優先度（影響度×緊急度のマトリクス）をそのまま流用する。処理順序専用の別基準は設けない。
+
 ## 未確定事項
 
 - 常駐して状態変化を検知するのか、都度PdM/POが起動するのか（実行形態）はTBD。
-- 複数Work Itemを並行して扱う際の優先順位付けはTBD。

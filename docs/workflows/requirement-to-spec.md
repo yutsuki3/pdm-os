@@ -29,7 +29,7 @@
    Work Item を `spec_drafting` に遷移。
 
 5. **ワイヤーフローの作成**
-   必要に応じて [templates/wireflow.md](../../templates/wireflow.md) を用いてワイヤーフローを作成する。作成ツール（Figma等）との連携方法はTBD。
+   必要に応じてFigmaで画面遷移を作成する。画面一覧・詳細遷移の正本はFigmaであり、[templates/wireflow.md](../../templates/wireflow.md) には概要とFigma URLへの参照のみを記載する（二重管理を避ける）。
 
 6. **レビュー・承認**
    Work Item を `spec_review` に遷移し、レビューを経て承認されると `spec_approved` になる。承認者はPdM/PO単独。承認基準は、仕様書テンプレートの必須項目に加え、非機能要件・ワイヤーフロー（必要な場合）が明記済みであること（[approval-policy.md](../architecture/approval-policy.md)）。
@@ -46,6 +46,3 @@
 | 仕様書草稿 | 要件 + 知識パック | `templates/specification.md` を埋めた草稿 |
 | 承認 | 仕様書草稿 | Notion上の承認済み仕様書 |
 
-## 未確定事項
-
-- ワイヤーフロー作成ツールとの連携方法

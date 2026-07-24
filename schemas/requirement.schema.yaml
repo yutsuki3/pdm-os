@@ -49,6 +49,9 @@ properties:
         type: string
   priority:
     type: string
-    description: 判断基準はTBD。未確定の場合はTBDを明示する。
+    description: 影響度×緊急度のマトリクスで判定する。
+  original_ref:
+    type: string
+    description: 依頼チャネル（Slackスレッド等）上の原文への参照。原文の正本はこのリポジトリではなく依頼チャネル自体。
 
-# 未確定事項 (TBD): priority の判断基準、要求原文の外部正本と保存先。
+# 未確定事項 (TBD): 依頼チャネルへの参照フォーマット。

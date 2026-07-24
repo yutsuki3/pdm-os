@@ -1,5 +1,5 @@
 # QA Request スキーマ
-# templates/qa-request.md に対応する送付前の草稿。QA依頼の送付先・正式な記録先はTBD。
+# templates/qa-request.md に対応する送付前の草稿。送付先はチャットツール（例: Slack）。送付証跡は送付メッセージへのリンクを正本とする。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/qa-request.schema.yaml"
@@ -61,7 +61,7 @@ properties:
       type: string
   delivery:
     type: object
-    description: 送付が実際に行われた場合のみ記録する。送付先・方法はTBD。
+    description: 送付が実際に行われた場合のみ記録する。destination_refには送付に使ったチャットメッセージ（Slack等）へのリンクを記録する（正本）。
     properties:
       sent_at:
         type: string
@@ -71,4 +71,4 @@ properties:
       destination_ref:
         type: string
 
-# 未確定事項 (TBD): QA送付先・方法、entry/exit criteria、送付済み記録の正本。
+# 未確定事項 (TBD): チャットチャンネル名の具体形式。

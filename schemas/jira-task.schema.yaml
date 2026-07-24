@@ -53,7 +53,7 @@ properties:
                 description: 仕様書ID、ワイヤーフロー参照、草稿ID、またはJira課題キー。
               item_ref:
                 type: string
-                description: FR-001、S2等、参照元成果物内の項目ID。
+                description: source_type=specification の場合はFR-001等の要件ID。source_type=wireflow の場合はFigma上のフレーム名/node-id（画面一覧はFigmaが正本のため、このリポジトリ内には独自の画面ID体系を持たない）。
   dependency_refs:
     type: array
     items:

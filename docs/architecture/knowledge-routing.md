@@ -27,8 +27,11 @@ Knowledge Agent ([docs/agents/knowledge-agent.md](../agents/knowledge-agent.md))
 - 複数システムを検索した結果、同じ経路・同じ論点で複数のヒットが得られること自体は問題ない（検索経路の重複は許可）。ただし、同じ出所に由来する情報を複数の独立した根拠として扱わない。詳細な運用ルールは [deduplication-policy.md](deduplication-policy.md) を参照。
 - 出典が異なる情報が矛盾する場合、Knowledge Agentは自動的に統合・要約せず、両方を提示し矛盾がある旨を明記する（判断は人間が行う。[ADR-0003](../decisions/ADR-0003-conflict-logging-over-silent-resolution.md)）。
 
+## 権限制御（決定）
+
+【決定】Knowledge Agentは、PdM/PO自身がアクセス権限を持つ範囲の情報を全て検索対象とする。PdM/POが閲覧権限を持たない情報（他部門限定ページ等）を除外する特別な制御は設けない。
+
 ## 未確定事項
 
 - 各システムへの検索アクセス方法（API連携か、エクスポートデータの検索か）はTBD。
 - 検索結果のランキング・関連度スコアの算出方法はTBD（`schemas/knowledge-item.schema.yaml` の `relevance_score` は現時点でプレースホルダ）。
-- 検索範囲の権限制御（PdM/POが閲覧権限を持たない情報を除外するか）はTBD。

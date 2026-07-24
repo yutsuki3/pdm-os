@@ -1,6 +1,6 @@
 # QA Result スキーマ
 # QAチームから受領した合否情報を参照するための最小構造。
-# QA結果の正式な正本システム・テンプレート・記録主体は未決定のため、このスキーマは提案である。
+# QA結果の正本は、QAチームが送付したチャットメッセージ（Slack等）。result_refにそのメッセージへのリンクを記録する。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/qa-result.schema.yaml"
@@ -15,7 +15,7 @@ properties:
     enum: [passed, failed]
   result_ref:
     type: string
-    description: QAチームの正式な結果記録を辿る参照。正本システムはTBD。
+    description: QAチームが送付したチャットメッセージ（Slack等）へのリンク。この参照先が正本。
   completed_at:
     type: string
     format: date-time
@@ -28,4 +28,4 @@ properties:
   notes:
     type: string
 
-# 未確定事項 (TBD): QA結果の正本、合格/不合格の記録形式、再依頼フロー。
+# 未確定事項 (TBD): 再依頼フローの詳細。

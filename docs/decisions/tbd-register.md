@@ -19,7 +19,7 @@
 | TBD-003 | 同一出所の機械的判定方法 | 複数のヒットが同じ情報の転記かどうかをどう判定するか | [deduplication-policy.md](../architecture/deduplication-policy.md) | 未着手（Codex検討事項） |
 | TBD-004 | 各正本システムへの検索アクセス手段 | API連携かエクスポートデータの検索か | [knowledge-routing.md](../architecture/knowledge-routing.md) | 未着手 |
 | TBD-005 | 検索結果の関連度スコア算出方法 | `relevance_score` の意味・算出方法 | [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) | 未着手（Codex検討事項） |
-| TBD-006 | 検索範囲の権限制御 | PdM/POが閲覧権限を持たない情報を除外するか | [knowledge-routing.md](../architecture/knowledge-routing.md) | 未着手 |
+| TBD-006 | 検索範囲の権限制御 | 【決定】除外しない。PdM/POのアクセス権限内の情報は全て検索対象とする | [knowledge-routing.md](../architecture/knowledge-routing.md) | 解決 |
 | TBD-007 | Notionへの仕様書反映方法・タイミング | 【決定】承認後、PdM/POが手動で反映する。将来的な自動反映は想定するがAPI連携は本フェーズのスコープ外。ページ構成の詳細は別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [specification-agent.md](../agents/specification-agent.md) | 解決 |
 | TBD-008 | 意思決定ログの置き場所・フォーマット | 【決定】仕様書ページ内に「決定理由」セクションを設けて記録する | [source-of-truth.md](../architecture/source-of-truth.md) | 解決 |
 | TBD-009 | Confluenceのスペース構成・検索範囲 | 【決定】全スペース・全期間を検索対象とする | [source-of-truth.md](../architecture/source-of-truth.md) | 解決 |
@@ -67,8 +67,8 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-029 | ワイヤーフロー作成の正式ツール・フォーマット | Figma等の利用有無 | [templates/wireflow.md](../../templates/wireflow.md) | 要確認 |
-| TBD-030 | テンプレートと外部ツール成果物の同期方法 | 二重管理を避ける方法 | [templates/wireflow.md](../../templates/wireflow.md) | 未着手 |
+| TBD-029 | ワイヤーフロー作成の正式ツール・フォーマット | 【決定】Figmaを使用 | [templates/wireflow.md](../../templates/wireflow.md) | 解決 |
+| TBD-030 | テンプレートと外部ツール成果物の同期方法 | 【決定】Figmaが正本。wireflow.mdは概要・Figma URLの参照のみ保持し、画面一覧・詳細遷移は記載しない | [templates/wireflow.md](../../templates/wireflow.md) | 解決 |
 
 ## 7. QA
 
@@ -103,7 +103,7 @@
 | TBD-042 | Work Itemインスタンスの永続化方法 | DB等、この設計フェーズのスコープ外 | [source-of-truth.md](../architecture/source-of-truth.md), [state-machine.md](../architecture/state-machine.md) | 未着手（次フェーズ以降） |
 | TBD-043 | Orchestratorの実行形態 | 常駐サービスか、都度起動のCLIか、Claude Code上のスキルか | [overview.md](../architecture/overview.md) | 未着手 |
 | TBD-044 | 各エージェントの実装技術 | LLMモデル・フレームワーク | [overview.md](../architecture/overview.md) | 未着手（次フェーズ以降） |
-| TBD-045 | 複数Work Itemの並行処理時の優先順位付け | Orchestratorの調整方法 | [orchestrator.md](../agents/orchestrator.md) | 未着手 |
+| TBD-045 | 複数Work Itemの並行処理時の優先順位付け | 【決定】requirement.mdの優先度（影響度×緊急度）をそのまま流用 | [orchestrator.md](../agents/orchestrator.md) | 解決 |
 | TBD-046 | 差し戻し（rejected/qa_failed）時の遷移先 | 【決定】常に `in_progress` に戻す。`requirement_defined` / `spec_drafting` へ戻すケースは設けない | [state-machine.md](../architecture/state-machine.md) | 解決 |
 
 ## 11. スキーマ・実装（Codexフェーズでの検討事項）
@@ -113,9 +113,9 @@
 | TBD-047 | 出所系統（オリジンのチェーン）のスキーマ表現 | knowledge-itemに重複・出所関係をどう持たせるか | [deduplication-policy.md](../architecture/deduplication-policy.md), [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-048 | 各スキーマのID採番ルール | work-item / specification 等のID体系 | [work-item.schema.yaml](../../schemas/work-item.schema.yaml), [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-049 | 非機能要件の必須項目範囲 | specification.schema.yaml の non_functional_requirements | [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
-| TBD-050 | QA結果の正本システム・結果記録形式 | `qa_passed` / `qa_failed` の根拠となるQA結果をどこに記録・参照するか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 要確認 |
-| TBD-051 | QA依頼の送付記録の正本 | `qa_requested` を確定する送付済み証跡をどこに残すか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 要確認 |
-| TBD-052 | 要求・要望原文の正本・保存先 | ステークホルダーの原要求をどこで正本として保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 要確認 |
+| TBD-050 | QA結果の正本システム・結果記録形式 | 【決定】QAチームが送付したチャットメッセージ（Slack等）を正本とする | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 解決 |
+| TBD-051 | QA依頼の送付記録の正本 | 【決定】送付に使ったチャットメッセージ（Slack等）へのリンクを正本とする | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 解決 |
+| TBD-052 | 要求・要望原文の正本・保存先 | 【決定】依頼チャネル（Slackスレッド等）自体を正本とする。requirement.mdは要約のみ | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 解決 |
 | TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | 【決定】アーカイブ先はNotion（現行仕様と同じ場所）。公開チャネル（社内/顧客向け）の具体形式は別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 検討中 |
 | TBD-054 | 状態遷移履歴の記録先・最小項目 | 誰がいつ何を根拠に状態を確定したかをどこに残すか | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 要確認 |
 
@@ -141,3 +141,4 @@
 - 更新: Round 2のCodexレビューにより、`draft_id` の形式・同一草稿リスト内の一意性、検証用仮定の実記録参照必須を定義へ反映。TBD-061に機械検証方式の提案を追記。
 - 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。
 - 更新: ユーザーとの確認により、正本反映・矛盾処理（TBD-001〜002, 007〜009, 031）、受領判断の差し戻し基準・GitHub/Drive特定方法（TBD-012, 025〜028, 034, 046）、Jira連携の一部（TBD-018, 021〜024）、QA・リリースの残り（TBD-032〜033, 035, 037〜038, 053）が確定。関連する `docs/` `templates/` `schemas/` に反映。TBD-019・020（Jiraプロジェクトキー等の具体値）とTBD-036（公開チャネル詳細）はユーザーが別途共有予定のため`要確認`/`検討中`のまま。
+- 更新: ユーザーとの確認により、未割当だった正本（QA結果・QA送付記録・要求原文、TBD-050〜052）を確定。いずれも既存のチャットツール（Slack等）でのやり取りを正本とする方針で統一。[source-of-truth.md](../architecture/source-of-truth.md)・[state-machine.md](../architecture/state-machine.md)・関連スキーマ・テンプレートに反映。

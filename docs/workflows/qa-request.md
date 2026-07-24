@@ -25,11 +25,11 @@
    QA合格・不合格の判定基準（entry/exit criteria）を明記する。Entry基準は「受領済みでテスト環境にデプロイ済み」、Exit基準は「仕様書の受け入れ条件を全件テスト済みでバグなし」とする。
 
 5. **送付**
-   PdM/POが内容を確認し、チャットツール（例: Slack）でQAチームへ直接依頼する。
+   PdM/POが内容を確認し、チャットツール（例: Slack）でQAチームへ直接依頼する。送付に使ったメッセージへのリンクが、この依頼の送付証跡（正本）となる。
    Work Itemを `qa_requested` に遷移。
 
 6. **結果の反映**
-   QAチームの正式な結果記録への参照（[schemas/qa-result.schema.yaml](../../schemas/qa-result.schema.yaml)）を確認した上で、`qa_passed` または `qa_failed` に遷移する。QA結果の正本システムはTBDであり、現時点ではこの遷移の証跡を一意に検証できない。`qa_failed` の場合はQA指摘を記載の上、Work Itemを `in_progress` に戻し、同じJiraタスクで再提出を待つ（[state-machine.md](../architecture/state-machine.md)）。再依頼条件の詳細はTBD。
+   QAチームが送付したチャットメッセージ（Slack等）を結果の正本とし、[schemas/qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) 形式でメッセージへの参照を記録した上で、`qa_passed` または `qa_failed` に遷移する。`qa_failed` の場合はQA指摘を記載の上、Work Itemを `in_progress` に戻し、同じJiraタスクで再提出を待つ（[state-machine.md](../architecture/state-machine.md)）。再依頼条件の詳細はTBD。
 
 ## 入力/出力まとめ
 
