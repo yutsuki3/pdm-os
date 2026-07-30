@@ -14,7 +14,7 @@ PdM OSの原則（[docs/vision/principles.md](../vision/principles.md) 原則2�
 | 仕様書承認 | `spec_review` → `spec_approved` | PdM/PO単独 | 上記に加え、非機能要件・ワイヤーフロー（必要な場合）も明記済みであること（[templates/specification.md](../../templates/specification.md) の必須項目が全て埋まっていること） | エンジニア/デザイナーの合意は承認の必須条件としない |
 | 受領判断 | `acceptance_review` → `accepted` / `rejected` | PdM/PO単独 | 仕様書の要件を満たしていること。見た目・文言レベルの差異は軽微とし記録の上で受領・フォローアップ、機能・動作に影響する差異は重大として差し戻す | 差し戻し時は受領レポートに理由を記載し、同じJiraタスクで再提出を待つ（[workflows/acceptance.md](../workflows/acceptance.md)） |
 | QA依頼の送付可否 | `accepted` → `qa_requested` | PdM/PO単独 | 常に必須（受領した機能は例外なくQAを通す。条件によるスキップは行わない） | 送付先・送付方法・送付記録の正本は `TBD`（[workflows/qa-request.md](../workflows/qa-request.md)） |
-| リリース可否 | `qa_passed` → `release_note_drafting` → `released` | 会議体（PdM/PO + エンジニアリード + QAリード） | QA合格に加え、リリースノート草稿の内容確認、リスク（影響範囲・ロールバック手順等）の確認が必須 | リリース単位は機能単位の随時リリース。アーカイブ先はNotion。公開チャネルの具体形式は `TBD`（[workflows/release-note.md](../workflows/release-note.md)） |
+| リリース可否 | `qa_passed` → `release_note_drafting` → `released` | 会議体（PdM/PO + エンジニアリード + QAリード） | QA合格に加え、リリースノート草稿の内容確認、リスク（影響範囲・ロールバック手順等）の確認が必須 | リリース単位は機能単位の随時リリース。アーカイブ先はNotion。公開チャネルは社内=Slack、顧客向け=Notion公開ページ。具体的なチャンネル名・ページ形式は `TBD`（[workflows/release-note.md](../workflows/release-note.md)） |
 
 ## 承認の記録方法・緊急時の扱い（全ゲート共通）
 
@@ -31,4 +31,4 @@ PdM OSの原則（[docs/vision/principles.md](../vision/principles.md) 原則2�
 ## 未確定事項（まとめ）
 
 - QA依頼の送付記録の正本
-- リリースノートの公開チャネルの具体形式（社内向け/顧客向けそれぞれ）
+- リリースノートの具体的なSlackチャンネル名・Notion公開ページのフォーマット

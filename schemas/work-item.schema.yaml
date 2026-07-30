@@ -95,7 +95,7 @@ properties:
         description: QA結果の正式記録への参照。正本はQAチームが送付したチャットメッセージ（Slack等）。
       release_note_ref:
         type: string
-        description: 公開済みリリースノートへの参照。アーカイブ先はNotion。公開チャネルの具体形式はTBD。
+        description: 公開済みリリースノートへの参照。アーカイブ先はNotion。公開チャネルは社内=Slack、顧客向け=Notion公開ページ。具体的なチャンネル名・ページ形式はTBD。
 
   created_at:
     type: string
@@ -105,7 +105,9 @@ properties:
     type: string
     format: date-time
 
+# 【決定】状態遷移履歴を本スキーマに専用フィールドとして持たせることはしない。承認ゲート（要件確定・仕様書承認・受領判断・QA依頼送付可否・リリース可否）の遷移はNotion上のプロパティに記録する（docs/architecture/approval-policy.md）。
+# それ以外の遷移（Jira連動によるもの等）は、本スキーマの updated_at と links 配下の各正本参照（jira_issue_keys 等）で追跡すれば十分とし、専用の履歴配列は設けない。
+#
 # 未確定事項 (TBD):
 # - id の採番ルール
 # - owner の識別子形式
-# - 状態遷移の履歴(誰が・いつ・なぜ遷移させたか)を本スキーマに含めるかどうか

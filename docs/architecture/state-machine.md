@@ -74,10 +74,8 @@ stateDiagram-v2
 | `qa_requested` → `qa_passed` / `qa_failed` | QA依頼送付済み | QAチームが送付したチャットメッセージ（Slack等）を正本とする | QAチームの結果を人間が反映 |
 | `qa_failed` → `in_progress` | QA不合格結果・指摘への参照 | 差し戻し理由を記載。常に `in_progress` へ戻し、同じJiraタスクで再提出を待つ。再依頼条件: `TBD` | 人間 |
 | `qa_passed` → `release_note_drafting` | QA合格結果への参照 | リリースノート草稿 | Release Agentは草稿作成のみ |
-| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録（QA合格 + リリースノート内容確認 + リスク確認）。Notion上のプロパティに記録。公開先への参照は `TBD` | 人間（会議体: PdM/PO + エンジニアリード + QAリード、[approval-policy.md](approval-policy.md)） |
+| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録（QA合格 + リリースノート内容確認 + リスク確認）。Notion上のプロパティに記録。社内はSlackチャンネル、顧客向けはNotion公開ページへ公開。具体的なチャンネル名・ページ形式は `TBD` | 人間（会議体: PdM/PO + エンジニアリード + QAリード、[approval-policy.md](approval-policy.md)） |
 
 ## 未確定事項
 
-- 1つのWork Itemが複数のJiraタスクに分解された場合、それぞれの進捗をどうWork Item全体の状態に集約するかはTBD。
 - 状態遷移をJiraのステータスと自動同期するか、PdM OS独自に管理するかはTBD。
-- QA結果の正本システム、QA依頼の送付記録の正本、遷移履歴の保存先はTBD。

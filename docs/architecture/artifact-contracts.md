@@ -14,7 +14,7 @@
 | 受領レポート | Acceptance Agent（草稿） | 承認済み仕様書、GitHub実装、Drive受領原本 | [acceptance-report.schema.yaml](../../schemas/acceptance-report.schema.yaml) | GitHub/Google Driveへの参照に基づく判断材料。最終判断は人間 | PdM/PO、Release Agent |
 | QA依頼 | Release Agent（草稿） | `accepted` のWork Item、受領レポート、関連参照 | [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) / [qa-request.md](../../templates/qa-request.md) | 送付先はチャットツール（例: Slack）。送付記録の正本は送付メッセージへのリンク（決定） | PdM/PO、QAチーム |
 | QA結果参照 | QAチーム | QA実施結果 | [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | **QA結果の正本はQAチームが送付したチャットメッセージ（Slack等）（決定）**。このSchemaはそのメッセージへの参照のみを表す | Orchestrator、Release Agent |
-| リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | アーカイブ先はNotion（決定）。公開チャネルの具体形式は `TBD` | PdM/PO、公開先 |
+| リリースノート | Release Agent（草稿） | `qa_passed` のWork Item群、仕様書、Jira、GitHub | [release-note.schema.yaml](../../schemas/release-note.schema.yaml) / [release-note.md](../../templates/release-note.md) | アーカイブ先はNotion（決定）。公開チャネルは社内=Slack、顧客向け=Notion公開ページ（決定）。具体的なチャンネル名・ページ形式は `TBD` | PdM/PO、公開先 |
 | 検証実施記録 | パイロット実施者 | 対象成果物、テスト用の仮定 | [validation-run.schema.yaml](../../schemas/validation-run.schema.yaml) / [validation-run.md](../../templates/validation-run.md) | パイプラインの検証記録。業務上の承認・状態の正本ではない | PdM/PO、設計レビュー担当 |
 
 ## 横断ルール
@@ -27,5 +27,5 @@
 
 ## 未確定事項
 
-- リリースノート公開チャネルの具体形式。
+- リリースノート公開チャネルの具体的なチャンネル名・ページ形式。
 - 成果物IDと要件IDの採番規則、状態遷移履歴の保管先。

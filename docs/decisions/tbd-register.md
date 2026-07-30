@@ -84,7 +84,7 @@
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
 | TBD-035 | リリース単位の定義 | 【決定】機能単位の随時リリース（QA合格次第、定期バッチなし） | [templates/release-note.md](../../templates/release-note.md) | 解決 |
-| TBD-036 | リリースノートの公開先・フォーマット | 【決定】社内向けと顧客向けを別々に作成。具体的なチャネル・フォーマットは別途TBD | [workflows/release-note.md](../workflows/release-note.md) | 検討中 |
+| TBD-036 | リリースノートの公開先・フォーマット | 【決定】社内向けと顧客向けを別々に作成。社内=Slackチャンネル、顧客向け=Notion公開ページ。具体的なチャンネル名・ページフォーマットは別途TBD | [workflows/release-note.md](../workflows/release-note.md) | 検討中 |
 | TBD-037 | 公開承認者・基準 | 【決定】TBD-014と同一。会議体（PdM/PO + エンジニアリード + QAリード）が、QA合格 + リリースノート内容確認 + リスク確認を基準に承認 | [approval-policy.md](../architecture/approval-policy.md), [workflows/release-note.md](../workflows/release-note.md) | 解決 |
 | TBD-038 | 過去のリリースノートのアーカイブ先 | 【決定】Notion（現行仕様と同じ場所） | [workflows/release-note.md](../workflows/release-note.md) | 解決 |
 
@@ -116,8 +116,8 @@
 | TBD-050 | QA結果の正本システム・結果記録形式 | 【決定】QAチームが送付したチャットメッセージ（Slack等）を正本とする | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 解決 |
 | TBD-051 | QA依頼の送付記録の正本 | 【決定】送付に使ったチャットメッセージ（Slack等）へのリンクを正本とする | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 解決 |
 | TBD-052 | 要求・要望原文の正本・保存先 | 【決定】依頼チャネル（Slackスレッド等）自体を正本とする。requirement.mdは要約のみ | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 解決 |
-| TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | 【決定】アーカイブ先はNotion（現行仕様と同じ場所）。公開チャネル（社内/顧客向け）の具体形式は別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 検討中 |
-| TBD-054 | 状態遷移履歴の記録先・最小項目 | 誰がいつ何を根拠に状態を確定したかをどこに残すか | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 要確認 |
+| TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | 【決定】アーカイブ先はNotion（現行仕様と同じ場所）。公開チャネルは社内=Slack、顧客向け=Notion公開ページ。具体的なチャンネル名・ページ形式は別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 検討中 |
+| TBD-054 | 状態遷移履歴の記録先・最小項目 | 【決定】承認ゲートの遷移はNotion上のプロパティに記録（既定）。それ以外の遷移（Jira連動等）はWork Item自体のプロパティ（updated_at等）で十分とし、専用の履歴配列は設けない | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 解決 |
 
 ## 12. パイロット運用
 
@@ -144,3 +144,4 @@
 - 更新: ユーザーとの確認により、未割当だった正本（QA結果・QA送付記録・要求原文、TBD-050〜052）を確定。いずれも既存のチャットツール（Slack等）でのやり取りを正本とする方針で統一。[source-of-truth.md](../architecture/source-of-truth.md)・[state-machine.md](../architecture/state-machine.md)・関連スキーマ・テンプレートに反映。
 - 更新: ユーザーとの確認により、検索範囲の権限制御（TBD-006）、ワイヤーフローツール（TBD-029〜030、Figmaを正本化）、複数Work Item並行処理の優先順位（TBD-045）、パイロット運用の標準手順・往復ルール・ID命名（TBD-055〜057）が確定。ワイヤーフロー正本化に伴い `jira-task.schema.yaml` の `item_ref` 記法をFigma参照に更新し、TBD-058に注記を追加。
 - 更新: ユーザーとの確認により、AIツール役割分担（TBD-039〜041）が確定。Notion AIが資料収集（Knowledge Agentの機能的役割）全体を担当し、Claude Codeへknowledge-item.schema.yaml形式で引き継ぐ。Geminiは現時点では未使用。ツール間の見解相違はADR-0003の方針に準じPdM/POが最終判断。[ai-tool-roles.md](../agents/ai-tool-roles.md) に反映。
+- 更新: ユーザーとの確認により、リリースノート公開チャネル（TBD-036, 053: 社内=Slack、顧客向け=Notion公開ページ）と状態遷移履歴の記録方針（TBD-054: 承認ゲートはNotionプロパティ、それ以外はWork Item自体のプロパティで十分・専用履歴配列は設けない）が確定。関連する `docs/` `templates/` `schemas/` `prompts/` に反映。あわせて state-machine.md に残っていた解決済みTBDの記述（TBD-024集約規則、QA正本関連）を除去。
