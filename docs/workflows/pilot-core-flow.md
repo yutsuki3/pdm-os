@@ -6,7 +6,7 @@
 
 このパイロットは、PdM/POの承認やJira・Notionへの正式登録を自動化しない。QA・リリース工程は、QA結果や公開済みリリースノートの正本が未決定のため対象外とする。
 
-実案件または正本システムへのアクセスがない場合は、[run-validation-dry-run.md](../../prompts/run-validation-dry-run.md) に従い、検証実施記録を作成してメカニクスのみを確認する。ドライランの仮定は実際の状態を変更しない。
+実案件または正本システムへのアクセスがない場合は、[run-validation-dry-run.md](../../prompts/run-validation-dry-run.md) に従い、[examples/pilot-feature](../../examples/pilot-feature/) の架空サンプルを用いて検証実施記録を作成し、メカニクスのみを確認する。【決定】この方法（`run-validation-dry-run.md` + 架空サンプル）を標準のドライラン手順とする。ドライランの仮定は実際の状態を変更しない。
 
 ## 対象の選定条件
 
@@ -16,7 +16,9 @@
 - 機密情報をこのリポジトリに複製せず、外部正本へのURL/ID参照だけで成果物をレビューできる。
 - リリース期限・承認を急がず、草稿レビューの時間を確保できる。
 
-選定者、案件名、優先度、実施期限は業務判断であり `TBD`。本ドキュメントでは決めない。
+選定者、案件名、実施期限は業務判断であり `TBD`。本ドキュメントでは決めない。優先度は [templates/requirement.md](../../templates/requirement.md) の基準（影響度×緊急度）に従う。
+
+【決定】ドライラン・パイロット用のWork Item IDには `WI-PILOT-` プレフィックスを正式に採用する（例: `WI-PILOT-001`）。実案件用のID体系はID採番ルール確定後（TBD-048）に別途付与する。
 
 ## 実案件パイロットの準備メモ
 
@@ -51,7 +53,7 @@
 
 1. PdM/POが要求原文の参照、Work Item ID、検索してよい正本の範囲をClaude Codeに渡す。
 2. Claude Codeが [collect-knowledge.md](../../prompts/collect-knowledge.md) に従い、知識パックを草稿化する。出所不明・矛盾・未確認事項は推測せず記録する。
-3. Claude Codeが [create-specification.md](../../prompts/create-specification.md) に従い、仕様書草稿と必要なワイヤーフロー草稿を作成する。
+3. Claude Codeが [create-specification.md](../../prompts/create-specification.md) に従い、仕様書草稿を作成する。必要な場合はFigmaでワイヤーフローを作成する。Figma側で仕様書に無い論点が見つかった場合は、必ず仕様書へ反映してから次のステップへ進む（往復を許容し、仕様書とFigmaの内容を乖離させない）。
 4. 人間が要件・仕様書草稿をレビューする。承認者・基準は [approval-policy.md](../architecture/approval-policy.md) の確定内容（PdM/PO単独）に従う。Notionへの正式反映方法は既存の `TBD` に従い、このパイロットで勝手に確定しない。
 5. 人間が承認済み仕様書を明示した場合に限り、Claude Codeが [decompose-tasks.md](../../prompts/decompose-tasks.md) に従いJiraタスク草稿を作成する。
 6. PdM/POが、成果物の完全性・参照の追跡可能性・TBDの妥当性を確認する。Jiraへの登録は人間が行う。
