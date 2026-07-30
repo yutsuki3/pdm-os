@@ -32,4 +32,3 @@
 ## 未確定事項
 
 - 各正本システムへの実際の検索アクセス手段（API/エクスポート）はTBD。
-- 検索範囲の権限制御はTBD ([docs/architecture/knowledge-routing.md](../architecture/knowledge-routing.md) 参照)。

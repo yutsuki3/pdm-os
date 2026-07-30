@@ -92,9 +92,9 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-039 | Gemini・Notion AIの具体的担当範囲 | 現時点で完全に未定 | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 未着手 |
-| TBD-040 | 複数ツールが同一機能的役割を分担する場合の引き継ぎ方法 | フォーマット・整合性確保 | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 未着手 |
-| TBD-041 | ツール間で見解が割れた場合の解決ルール | 例: Codexのレビューが既存設計と矛盾する場合 | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 未着手 |
+| TBD-039 | Gemini・Notion AIの具体的担当範囲 | 【決定】Notion AIが資料収集（Knowledge Agentの機能的役割）全体を担当。Geminiは現時点では使用しない | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 解決 |
+| TBD-040 | 複数ツールが同一機能的役割を分担する場合の引き継ぎ方法 | 【決定】Notion AIがknowledge-item.schema.yaml形式で知識パックを出力し、Claude Codeが受け取る | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 解決 |
+| TBD-041 | ツール間で見解が割れた場合の解決ルール | 【決定】ADR-0003の矛盾記録方針に準じ、黙って解決せず記録した上でPdM/POが最終判断 | [ai-tool-roles.md](../agents/ai-tool-roles.md) | 解決 |
 
 ## 10. 状態管理・実行形態
 
@@ -142,4 +142,5 @@
 - 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。
 - 更新: ユーザーとの確認により、正本反映・矛盾処理（TBD-001〜002, 007〜009, 031）、受領判断の差し戻し基準・GitHub/Drive特定方法（TBD-012, 025〜028, 034, 046）、Jira連携の一部（TBD-018, 021〜024）、QA・リリースの残り（TBD-032〜033, 035, 037〜038, 053）が確定。関連する `docs/` `templates/` `schemas/` に反映。TBD-019・020（Jiraプロジェクトキー等の具体値）とTBD-036（公開チャネル詳細）はユーザーが別途共有予定のため`要確認`/`検討中`のまま。
 - 更新: ユーザーとの確認により、未割当だった正本（QA結果・QA送付記録・要求原文、TBD-050〜052）を確定。いずれも既存のチャットツール（Slack等）でのやり取りを正本とする方針で統一。[source-of-truth.md](../architecture/source-of-truth.md)・[state-machine.md](../architecture/state-machine.md)・関連スキーマ・テンプレートに反映。
-- 更新: ユーザーとの確認により、検索範囲の権限制御（TBD-006）、ワイヤーフローツール（TBD-029〜030、Figmaを正本化）、複数Work Item並行処理の優先順位（TBD-045）、パイロット運用の標準手順・往復ルール・ID命名（TBD-055〜057）が確定。ワイヤーフロー正本化に伴い `jira-task.schema.yaml` の `item_ref` 記法をFigma参照に更新し、TBD-058に注記を追加。Gemini/Notion AI役割分担（TBD-039〜041）は今回見送り、未着手のまま。
+- 更新: ユーザーとの確認により、検索範囲の権限制御（TBD-006）、ワイヤーフローツール（TBD-029〜030、Figmaを正本化）、複数Work Item並行処理の優先順位（TBD-045）、パイロット運用の標準手順・往復ルール・ID命名（TBD-055〜057）が確定。ワイヤーフロー正本化に伴い `jira-task.schema.yaml` の `item_ref` 記法をFigma参照に更新し、TBD-058に注記を追加。
+- 更新: ユーザーとの確認により、AIツール役割分担（TBD-039〜041）が確定。Notion AIが資料収集（Knowledge Agentの機能的役割）全体を担当し、Claude Codeへknowledge-item.schema.yaml形式で引き継ぐ。Geminiは現時点では未使用。ツール間の見解相違はADR-0003の方針に準じPdM/POが最終判断。[ai-tool-roles.md](../agents/ai-tool-roles.md) に反映。
