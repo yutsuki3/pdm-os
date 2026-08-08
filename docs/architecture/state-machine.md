@@ -65,18 +65,19 @@ stateDiagram-v2
 | `spec_approved` → `jira_tasks_created` | 承認済みNotion仕様書 | Jira課題が作成され、仕様書・Work Itemと相互リンク済み | 人間が登録・確認 |
 | `jira_tasks_created` → `in_progress` | Jira課題が存在する | 作業開始のJira状態。Work Itemへの集約規則: `TBD` | Jira情報を人間が確認 |
 | `in_progress` → `delivered` | 配下の作業が完了報告された | 成果物（GitHub/Drive）への参照。完了判定・集約規則: `TBD` | 人間が確認 |
-| `delivered` → `acceptance_review` | 承認済み仕様書、GitHub実装、Drive受領原本を特定できる | 受領レポート草稿 | Acceptance Agentは草稿作成のみ |
+| `delivered` → `acceptance_review` | 承認済み仕様書、GitHubのマージ済みPR、Drive受領原本を特定できる | 受領レポート草稿 | Acceptance Agentは草稿作成のみ |
 | `acceptance_review` → `accepted` / `rejected` | 受領レポートと差異一覧 | 人間の判断記録（`decision`、判断者、日時）。Notion上のプロパティに記録。軽微な差異は記録の上で受領。「軽微」の線引き基準は `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
 | `rejected` → 戻り先 | 差し戻し理由 | 戻り先（`requirement_defined` / `spec_drafting` / `in_progress` 等）の選択。**遷移先と基準: `TBD`** | 人間 |
-| `accepted` → `qa_requested` | QA依頼草稿と受領済み成果物 | QA依頼の実送付記録。受領した機能は例外なく常にQAへ送付する（スキップ規定なし）。送付先・正本: `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
-| `qa_requested` → `qa_passed` / `qa_failed` | QA依頼送付済み | QAチームの正式な結果記録への参照。結果の正本: `TBD` | QAチームの結果を人間が反映 |
+| `accepted` → `qa_requested` | QA依頼草稿と受領済み成果物 | Slackの送付投稿への参照（パーマリンク）。受領した機能は例外なく常にQAへ送付する（スキップ規定なし）。送付先チャンネル・投稿形式は `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
+| `qa_requested` → `qa_passed` / `qa_failed` | QA依頼送付済み（Slack投稿への参照がある） | JiraのQAチケットのステータスと結果記録への参照 | QAチームの結果を人間が反映 |
 | `qa_failed` → 戻り先 | QA不合格結果・指摘への参照 | 戻り先と再依頼条件。**いずれも `TBD`** | 人間 |
 | `qa_passed` → `release_note_drafting` | QA合格結果への参照 | リリースノート草稿 | Release Agentは草稿作成のみ |
-| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録（QA合格 + リリースノート内容確認 + リスク確認）。Notion上のプロパティに記録。公開先への参照は `TBD` | 人間（会議体: PdM/PO + エンジニアリード + QAリード、[approval-policy.md](approval-policy.md)） |
+| `release_note_drafting` → `released` | 承認対象のリリースノート草稿 | 人間の公開・リリース判断記録（QA合格 + リリースノート内容確認 + リスク確認）。Notion上のプロパティに記録。公開済みリリースノートのNotionページURL | 人間（会議体: PdM/PO + エンジニアリード + QAリード、[approval-policy.md](approval-policy.md)） |
 
 ## 未確定事項
 
 - `rejected` / `qa_failed` からの差し戻し先が常に `in_progress` でよいか（`requirement_defined` / `spec_drafting` に戻すケースがあるか）はTBD。戻り先は図に示しておらず、確定した遷移規則ではない。
 - 1つのWork Itemが複数のJiraタスクに分解された場合、それぞれの進捗をどうWork Item全体の状態に集約するかはTBD。
 - 状態遷移をJiraのステータスと自動同期するか、PdM OS独自に管理するかはTBD。
-- QA結果の正本システム、QA依頼の送付記録の正本、遷移履歴の保存先はTBD。
+- 遷移履歴（誰がいつ何を根拠に状態を確定したか）の保存先・最小項目はTBD。
+- QA依頼の送付証跡（Slack）とQA結果（Jira）は正本が分かれる。両者をどう相互リンクして辿るかはTBD。

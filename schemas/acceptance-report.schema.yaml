@@ -29,7 +29,7 @@ properties:
         type: array
         items:
           type: string
-        description: "実装事実として参照したGitHub上のPR/コミット/タグ。単位の定義はTBD。"
+        description: "実装事実として参照したGitHub上のマージ済みPR。未マージPR・個別コミット・タグは単独では根拠としない。"
       google_drive_file_ids:
         type: array
         items:

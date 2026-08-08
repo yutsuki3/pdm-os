@@ -23,6 +23,7 @@
 | TBD-007 | Notionへの仕様書反映方法・タイミング | 承認後、誰が・どう・いつNotionへ反映するか | [source-of-truth.md](../architecture/source-of-truth.md), [specification-agent.md](../agents/specification-agent.md) | 要確認 |
 | TBD-008 | 意思決定ログの置き場所・フォーマット | Notion上のどこに「なぜその仕様にしたか」を記録するか | [source-of-truth.md](../architecture/source-of-truth.md) | 未着手 |
 | TBD-009 | Confluenceのスペース構成・検索範囲 | 過去仕様がどのスペースに、どこまで遡って存在するか | [source-of-truth.md](../architecture/source-of-truth.md) | 要確認 |
+| TBD-062 | Notion上のページ・データベース構成 | 要求原文（TBD-052）と公開済みリリースノート（TBD-053）をNotionのどのページ／データベースに、どの構成で保持するか。正本システムは確定済みで、その内部構成が未確定 | [source-of-truth.md](../architecture/source-of-truth.md) | 要確認 |
 
 ## 2. 承認・権限
 
@@ -36,7 +37,8 @@
 | TBD-015 | 承認に必要な人数・合議の要否 | 【決定】要件確定・仕様書承認・受領判断・QA依頼送付可否はPdM/PO単独。リリース可否のみ3者の会議体 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
 | TBD-016 | 承認の記録方法 | 【決定】全ゲート共通でNotion上のプロパティに記録 | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
 | TBD-017 | 緊急時（ホットフィックス等）の承認簡略化規定 | 【決定】例外規定は設けない。緊急時も常に通常フローを通す | [approval-policy.md](../architecture/approval-policy.md) | 解決 |
-| TBD-018 | 優先度の判断基準 | 要求・要望の優先度をどう決めるか | [templates/requirement.md](../../templates/requirement.md) | 要確認 |
+| TBD-018 | 優先度の判断基準 | 【決定】「影響度 × 緊急度」の二軸で評価し、決定者はPdM/PO。各軸を高/中/低に振り分ける閾値と、二軸から総合優先度を導く規則は別途TBD | [templates/requirement.md](../../templates/requirement.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 解決 |
+| TBD-063 | 優先度の各軸の閾値・総合優先度の導出規則 | 影響度・緊急度をそれぞれ高/中/低に振り分ける具体的な閾値と、二軸から総合優先度を決める規則（例: 両方高なら高、片方のみ高なら中 等） | [templates/requirement.md](../../templates/requirement.md) | 要確認 |
 
 ## 3. Jira連携
 
@@ -53,7 +55,7 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-025 | 実装事実の単位 | PR/コミット/リリースタグのどれを単位とするか | [source-of-truth.md](../architecture/source-of-truth.md) | 要確認 |
+| TBD-025 | 実装事実の単位 | 【決定】マージ済みPRを単位とする。未マージのPR・個別コミット・リリースタグは単独では受領判断の根拠としない | [source-of-truth.md](../architecture/source-of-truth.md), [workflows/acceptance.md](../workflows/acceptance.md) | 解決 |
 | TBD-026 | 対象リポジトリの範囲 | 受領判断で参照するGitHubリポジトリの範囲 | [workflows/acceptance.md](../workflows/acceptance.md) | 未着手 |
 | TBD-027 | GitHub実装とJira/仕様書の紐付けルール | コミットメッセージ規約・PRテンプレート等 | [acceptance-agent.md](../agents/acceptance-agent.md) | 未着手 |
 
@@ -67,16 +69,18 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-029 | ワイヤーフロー作成の正式ツール・フォーマット | Figma等の利用有無 | [templates/wireflow.md](../../templates/wireflow.md) | 要確認 |
-| TBD-030 | テンプレートと外部ツール成果物の同期方法 | 二重管理を避ける方法 | [templates/wireflow.md](../../templates/wireflow.md) | 未着手 |
+| TBD-029 | ワイヤーフロー作成の正式ツール・フォーマット | 【決定】正式な成果物はFigma。ファイルの命名規則・格納場所は別途TBD | [templates/wireflow.md](../../templates/wireflow.md), [wireflow.schema.yaml](../../schemas/wireflow.schema.yaml) | 解決 |
+| TBD-030 | テンプレートと外部ツール成果物の同期方法 | 【部分決定】ビジュアルデザインはFigmaのみが持ち、リポジトリ側テンプレートは画面ID・遷移・分岐条件の構造化草稿に限定することで二重管理を避ける。画面IDとFigmaフレーム名の対応の付け方、Figma更新時に草稿を追随させる責任者・タイミングは未確定 | [templates/wireflow.md](../../templates/wireflow.md) | 検討中 |
+| TBD-064 | Figmaファイルの命名規則・格納場所 | 案件とFigmaファイルを一意に対応づける方法 | [templates/wireflow.md](../../templates/wireflow.md), [wireflow.schema.yaml](../../schemas/wireflow.schema.yaml) | 要確認 |
 
 ## 7. QA
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-031 | 受領判断とQA依頼の順序 | QA合格が受領の前提条件か | [workflows/qa-request.md](../workflows/qa-request.md) | 要確認 |
-| TBD-032 | QA依頼の送付先・送付方法 | 専用Jiraチケット/フォーム等 | [templates/qa-request.md](../../templates/qa-request.md) | 要確認 |
+| TBD-031 | 受領判断とQA依頼の順序 | 【決定】受領判断が先、QA依頼が後。QA合格は受領判断の前提条件としない（現行の状態遷移図どおり） | [workflows/qa-request.md](../workflows/qa-request.md), [state-machine.md](../architecture/state-machine.md) | 解決 |
+| TBD-032 | QA依頼の送付先・送付方法 | 【部分決定】送付はSlackで行い、投稿のパーマリンクを送付証跡とする（TBD-051）。送付先チャンネル・投稿フォーマット（スレッド運用の有無）は未確定 | [templates/qa-request.md](../../templates/qa-request.md), [workflows/qa-request.md](../workflows/qa-request.md) | 検討中 |
 | TBD-033 | entry/exit criteriaの具体的基準 | QA合否判定基準 | [templates/qa-request.md](../../templates/qa-request.md) | 未着手 |
+| TBD-065 | QA依頼投稿（Slack）とQAチケット（Jira）の相互リンク方法 | 送付証跡と結果の正本が別システムに分かれるため、両者を双方向に辿る方法が必要。投稿へのチケットキー記載、チケットへのパーマリンク記載等 | [workflows/qa-request.md](../workflows/qa-request.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 未着手 |
 | TBD-034 | QA不合格時の差し戻し先・再依頼フロー | どの状態に戻すか | [state-machine.md](../architecture/state-machine.md) | 未着手 |
 
 ## 8. リリース
@@ -84,9 +88,9 @@
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
 | TBD-035 | リリース単位の定義 | バージョニング規則（日次/週次/バージョン番号等） | [templates/release-note.md](../../templates/release-note.md) | 要確認 |
-| TBD-036 | リリースノートの公開先・フォーマット | Notion/Confluence/社内Slack/顧客向け等 | [workflows/release-note.md](../workflows/release-note.md) | 要確認 |
+| TBD-036 | リリースノートの公開先・フォーマット | 【部分決定】公開先はNotion（TBD-053）。Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分けは未確定 | [workflows/release-note.md](../workflows/release-note.md) | 検討中 |
 | TBD-037 | 公開承認者・基準 | 【決定】TBD-014と同一。会議体（PdM/PO + エンジニアリード + QAリード）が、QA合格 + リリースノート内容確認 + リスク確認を基準に承認 | [approval-policy.md](../architecture/approval-policy.md), [workflows/release-note.md](../workflows/release-note.md) | 解決 |
-| TBD-038 | 過去のリリースノートのアーカイブ先 | Confluence想定だが未確認 | [workflows/release-note.md](../workflows/release-note.md) | 要確認 |
+| TBD-038 | 過去のリリースノートのアーカイブ先 | 【決定】アーカイブ先もNotion。Confluenceへはアーカイブしない | [workflows/release-note.md](../workflows/release-note.md), [source-of-truth.md](../architecture/source-of-truth.md) | 解決 |
 
 ## 9. AIツール・役割分担
 
@@ -113,10 +117,10 @@
 | TBD-047 | 出所系統（オリジンのチェーン）のスキーマ表現 | knowledge-itemに重複・出所関係をどう持たせるか | [deduplication-policy.md](../architecture/deduplication-policy.md), [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-048 | 各スキーマのID採番ルール | work-item / specification 等のID体系 | [work-item.schema.yaml](../../schemas/work-item.schema.yaml), [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-049 | 非機能要件の必須項目範囲 | specification.schema.yaml の non_functional_requirements | [specification.schema.yaml](../../schemas/specification.schema.yaml) | 未着手（Codex検討事項） |
-| TBD-050 | QA結果の正本システム・結果記録形式 | `qa_passed` / `qa_failed` の根拠となるQA結果をどこに記録・参照するか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 要確認 |
-| TBD-051 | QA依頼の送付記録の正本 | `qa_requested` を確定する送付済み証跡をどこに残すか | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 要確認 |
-| TBD-052 | 要求・要望原文の正本・保存先 | ステークホルダーの原要求をどこで正本として保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 要確認 |
-| TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | `released` の公開証跡と過去ノートをどこで保持するか | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 要確認 |
+| TBD-050 | QA結果の正本システム・結果記録形式 | 【決定】正本はJira（QAチケットのステータスと結果記録）。QAチケットの課題タイプ・ステータス体系、合否をどのフィールドで表すかは別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [qa-result.schema.yaml](../../schemas/qa-result.schema.yaml) | 解決 |
+| TBD-051 | QA依頼の送付記録の正本 | 【決定】正本はSlack。送付投稿のパーマリンクを `qa_requested` の完了条件とする。送付先チャンネル・投稿形式はTBD-032 | [source-of-truth.md](../architecture/source-of-truth.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 解決 |
+| TBD-052 | 要求・要望原文の正本・保存先 | 【決定】正本はNotion。リポジトリ内の要求記録は転記であり正本ではない。原文を保持するページ／データベースの構成は別途TBD | [source-of-truth.md](../architecture/source-of-truth.md), [requirement.schema.yaml](../../schemas/requirement.schema.yaml) | 解決 |
+| TBD-053 | 公開済みリリースノートの正本・アーカイブ先 | 【決定】公開先・アーカイブ先ともNotion。公開ページURLを `released` の公開証跡とする | [source-of-truth.md](../architecture/source-of-truth.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 解決 |
 | TBD-054 | 状態遷移履歴の記録先・最小項目 | 誰がいつ何を根拠に状態を確定したかをどこに残すか | [state-machine.md](../architecture/state-machine.md), [work-item.schema.yaml](../../schemas/work-item.schema.yaml) | 要確認 |
 
 ## 12. パイロット運用
@@ -140,3 +144,4 @@
 - 更新: 新形式（draft_id / trace_refs / dependency_refs / validation-run）を使ってダミーパイプラインを再実行し（[validation-run-002.md](../../examples/pilot-feature/validation-run-002.md)）、TBD-058〜060の定義がダミーデータ上で機能することを確認。ステータスを`実案件未検証`に統一（実案件・実システムでの運用検証が残タスクであることを明示）。
 - 更新: Round 2のCodexレビューにより、`draft_id` の形式・同一草稿リスト内の一意性、検証用仮定の実記録参照必須を定義へ反映。TBD-061に機械検証方式の提案を追記。
 - 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。
+- 更新: ユーザーとの確認により、未割当だった正本（TBD-050〜053: 要求原文=Notion、QA依頼送付記録=Slack、QA結果=Jira、公開済みリリースノート=Notion）と、TBD-018（優先度=影響度×緊急度）・TBD-025（実装事実=マージ済みPR）・TBD-029（ワイヤーフロー=Figma）・TBD-031（受領判断が先、QAが後）・TBD-038が確定。[source-of-truth.md](../architecture/source-of-truth.md) の正本マッピングにSlackを追加し、関連するワークフロー・テンプレート・Schema・プロンプトへ反映した。派生して未確定になった項目をTBD-062〜065として追加。

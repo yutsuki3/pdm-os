@@ -2,7 +2,8 @@
 テンプレート: QA依頼
 対応スキーマ: schemas/qa-request.schema.yaml（受領情報は schemas/acceptance-report.schema.yaml を参照）
 関連ワークフロー: docs/workflows/qa-request.md
-送付先・送付方法・合否基準はTBD。
+送付証跡の正本はSlack投稿、QA結果の正本はJiraのQAチケット。
+送付先チャンネル・投稿フォーマット・合否基準はTBD。
 -->
 
 # QA依頼: {{タイトル}}
@@ -41,6 +42,10 @@
 
 {{既知の懸念事項、優先的に見てほしい観点}}
 
-## 送付先
+## 送付・結果の追跡
 
-{{TBD — QAチームへの送付方法（専用Jiraチケット/フォーム等）未確定}}
+- Slack送付投稿: {{送付後に投稿のパーマリンクを記入。送付前は未送付と明記する}}
+- QAチケット (Jira): {{結果を追うJira課題キー。未起票ならTBD}}
+
+送付証跡の正本はSlackの投稿、QA結果の正本はJiraのQAチケット。
+送付先チャンネル・投稿フォーマットはTBD。

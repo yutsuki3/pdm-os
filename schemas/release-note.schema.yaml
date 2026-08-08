@@ -1,5 +1,6 @@
 # Release Note スキーマ
-# templates/release-note.md に対応する公開前草稿。公開先・アーカイブ先の正本はTBD。
+# templates/release-note.md に対応する公開前草稿。
+# 公開済みリリースノートの正本・アーカイブ先はNotion（docs/architecture/source-of-truth.md）。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/release-note.schema.yaml"
@@ -46,13 +47,18 @@ properties:
     type: string
   publication:
     type: object
+    description: 公開が実際に行われた場合のみ記録する。
+    required: [notion_page_url]
     properties:
-      destination_ref:
+      notion_page_url:
         type: string
+        description: 公開済みリリースノートのNotionページURL。released の公開証跡。
       published_at:
         type: string
         format: date-time
       approved_by:
         type: string
 
-# 未確定事項 (TBD): リリース単位、公開先・アーカイブ先。公開承認者・基準は docs/architecture/approval-policy.md により確定（会議体: PdM/PO + エンジニアリード + QAリード）。
+# 未確定事項 (TBD): リリース単位（バージョニング規則）、
+# Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分け。
+# 公開承認者・基準は docs/architecture/approval-policy.md により確定（会議体: PdM/PO + エンジニアリード + QAリード）。

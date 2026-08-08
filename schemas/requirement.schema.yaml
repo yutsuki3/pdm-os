@@ -20,15 +20,20 @@ properties:
     type: string
   request_source:
     type: object
-    required: [requester, channel]
+    required: [requester, channel, notion_source_url]
     properties:
       requester:
         type: string
       channel:
         type: string
+      notion_source_url:
+        type: string
+        description: 要求原文の正本であるNotionページのURL。原文の正本はNotion。
   request_text:
     type: string
-    description: 要求・要望の原文または原文への正確な参照。
+    description: >-
+      原文の転記。正本は request_source.notion_source_url であり、
+      本項目はその写しにすぎない。両者が食い違う場合はNotionを優先し、食い違いを記録する。
   background_and_goal:
     type: string
   current_spec_url:
@@ -48,7 +53,23 @@ properties:
       out_of_scope:
         type: string
   priority:
-    type: string
-    description: 判断基準はTBD。未確定の場合はTBDを明示する。
+    type: object
+    description: 影響度 × 緊急度の二軸で評価する。決定者はPdM/PO。
+    properties:
+      impact:
+        type: string
+        enum: [high, medium, low]
+      impact_rationale:
+        type: string
+      urgency:
+        type: string
+        enum: [high, medium, low]
+      urgency_rationale:
+        type: string
+      overall:
+        type: string
+        enum: [high, medium, low]
+        description: 総合優先度。二軸から総合を導く規則はTBD。
 
-# 未確定事項 (TBD): priority の判断基準、要求原文の外部正本と保存先。
+# 未確定事項 (TBD): impact / urgency を high / medium / low に振り分ける閾値、
+# 二軸から overall を導く規則。

@@ -2,7 +2,7 @@
 テンプレート: リリースノート
 関連ワークフロー: docs/workflows/release-note.md
 対応スキーマ: schemas/release-note.schema.yaml
-リリース単位の定義・公開先はTBD。
+公開先・アーカイブ先はNotion。リリース単位の定義はTBD。
 -->
 
 # リリースノート: {{バージョン/日付}}
@@ -30,7 +30,10 @@
 
 ## 公開先
 
-{{TBD — Notion/Confluence/社内Slack/顧客向けチャネル等、公開先未確定}}
+- 公開先: Notion
+- 公開ページURL: {{公開後に記入。未公開の場合は未公開と明記する}}
+
+過去分のアーカイブ先もNotion。Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分けはTBD。
 
 ## 承認
 

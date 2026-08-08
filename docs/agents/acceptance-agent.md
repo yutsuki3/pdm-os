@@ -23,7 +23,7 @@ GitHub上の実装事実、Google Drive上の受領原本と、仕様書（Notio
 ## 入力
 
 - 仕様書（Notion、正本）
-- 実装事実（GitHub上のPR/コミット/タグ）
+- 実装事実（GitHub上のマージ済みPR。未マージPR・個別コミット・タグは単独では根拠としない）
 - 受領原本（Google Drive上のファイル）
 
 ## 出力
@@ -32,6 +32,6 @@ GitHub上の実装事実、Google Drive上の受領原本と、仕様書（Notio
 
 ## 未確定事項
 
-- GitHub実装とJiraタスク/仕様書との紐付けルール。
+- マージ済みPRとJiraタスク/仕様書との紐付けルール。
 - Google Drive上の受領原本の特定方法。
 - 差異の重大度分類基準の有無。

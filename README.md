@@ -21,11 +21,15 @@ PdM/PO (プロダクトマネージャー / プロダクトオーナー) の業�
 
 | ドメイン | 正本システム |
 |---|---|
+| 要求・要望の原文 | Notion |
 | 現行仕様と意思決定 | Notion |
 | 過去仕様 | Confluence |
 | 受領原本とGoogle Docs | Google Drive |
 | タスク状態 | Jira |
-| 実装事実 | GitHub |
+| QA結果 | Jira (QAチケット) |
+| QA依頼の送付記録 | Slack |
+| 実装事実 | GitHub (マージ済みPR) |
+| 公開済みリリースノート | Notion |
 | PdM OS自体の設計・ルール・状態管理 | このリポジトリ |
 
 詳細は [docs/architecture/source-of-truth.md](docs/architecture/source-of-truth.md) を参照してください。

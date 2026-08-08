@@ -15,7 +15,7 @@
    Work Itemが `delivered` 状態であること（Jira上のタスクが完了報告されている）を確認する。
 
 2. **成果物の特定**
-   - 実装事実: GitHub上の対応するPR/コミット/タグを特定する。特定方法（Jiraチケット番号との紐付けルール）はTBD。
+   - 実装事実: GitHub上の対応する**マージ済みPR**を特定する。【決定】実装事実の単位はマージ済みPRとし、未マージのPR・個別コミット・リリースタグは単独では根拠としない（[source-of-truth.md](../architecture/source-of-truth.md)）。PRとJiraチケットの紐付けルール、対象リポジトリの範囲はTBD。
    - 受領原本: Google Drive上の対応するファイル（デザイン成果物、Google Docs等）を特定する。特定方法はTBD。
 
 3. **突き合わせ**
@@ -28,16 +28,19 @@
 5. **受領判断**
    PdM/PO単独がレポートをもとに受領（`accepted`）または差し戻し（`rejected`）を判断する。仕様書の要件を満たしていることが基準。軽微な差異がある場合は差異を受領レポートに記録した上で受領し、別途フォローアップする。「軽微」と「重大（差し戻し対象）」の線引き基準、差し戻し時の記法はTBD ([approval-policy.md](../architecture/approval-policy.md))。
 
+   【決定】QAは受領判断の前提条件ではない。受領（`accepted`）を経てからQA依頼を送付する順序で確定している（[qa-request.md](qa-request.md)）。
+
 ## 入力/出力まとめ
 
 | ステップ | 入力 | 出力 |
 |---|---|---|
-| 突き合わせ | 仕様書 + GitHub実装 + Google Drive成果物 | `schemas/acceptance-report.schema.yaml` に基づくレポート草稿 |
+| 突き合わせ | 仕様書 + GitHubのマージ済みPR + Google Drive成果物 | `schemas/acceptance-report.schema.yaml` に基づくレポート草稿 |
 | 受領判断 | レポート草稿 | 受領 (`accepted`) または差し戻し (`rejected`) |
 
 ## 未確定事項
 
-- GitHub上の実装事実とJiraタスクの紐付けルール（コミットメッセージ規約、PRテンプレート等）
+- マージ済みPRとJiraタスクの紐付けルール（コミットメッセージ規約、PRテンプレート等）
+- 受領判断で参照するGitHubリポジトリの範囲
 - Google Drive上の受領原本の特定方法（フォルダ構成・ステータスプロパティ）
 - 「軽微な差異」と「重大な差異（差し戻し対象）」の線引き基準
 - 差し戻し時の記録方法・再提出のフロー

@@ -8,7 +8,7 @@
 ## architecture — 全体構成
 
 - [overview.md](architecture/overview.md) — システム全体の構成
-- [source-of-truth.md](architecture/source-of-truth.md) — 正本マッピングと参照ルール（6ドメイン）
+- [source-of-truth.md](architecture/source-of-truth.md) — 正本マッピングと参照ルール（Notion / Confluence / Google Drive / Jira / Slack / GitHub / 本リポジトリ）
 - [deduplication-policy.md](architecture/deduplication-policy.md) — 情報取得と重複排除の方針
 - [knowledge-routing.md](architecture/knowledge-routing.md) — 検索・知識ルーティングのルール
 - [artifact-contracts.md](architecture/artifact-contracts.md) — 成果物の入力・出力・Schema・正本の対応

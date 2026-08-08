@@ -80,7 +80,7 @@ properties:
         type: array
         items:
           type: string
-        description: "対応するGitHub上の実装事実 (PR/コミット/タグ)。単位の定義はTBD。"
+        description: "対応するGitHub上の実装事実 (マージ済みPR)。"
       requirement_ref:
         type: string
         description: 要求・要望記録への参照。原文の正本・保存先はTBD。

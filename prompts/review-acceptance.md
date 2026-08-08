@@ -9,7 +9,7 @@
 ## 入力
 
 - 承認済み仕様書 ([schemas/specification.schema.yaml](../schemas/specification.schema.yaml))
-- 実装事実 (GitHub上のPR/コミット/タグ。単位の定義はTBD)
+- 実装事実 (GitHub上のマージ済みPR。未マージPR・個別コミット・タグは単独では根拠としない)
 - 受領原本 (Google Drive上のファイル。特定方法はTBD)
 
 ## 手順

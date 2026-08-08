@@ -1,5 +1,7 @@
 # QA Request スキーマ
-# templates/qa-request.md に対応する送付前の草稿。QA依頼の送付先・正式な記録先はTBD。
+# templates/qa-request.md に対応する送付前の草稿。
+# 送付証跡の正本はSlackの投稿（docs/architecture/source-of-truth.md）。
+# 送付先チャンネル・投稿フォーマットはTBD。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/qa-request.schema.yaml"
@@ -61,14 +63,22 @@ properties:
       type: string
   delivery:
     type: object
-    description: 送付が実際に行われた場合のみ記録する。送付先・方法はTBD。
+    description: >-
+      送付が実際に行われた場合のみ記録する。記録した場合は slack_permalink が
+      qa_requested の遷移証跡となる。
+    required: [slack_permalink]
     properties:
       sent_at:
         type: string
         format: date-time
       sent_by:
         type: string
-      destination_ref:
+      slack_permalink:
         type: string
+        description: 送付証跡となるSlack投稿のパーマリンク。送付証跡の正本はSlack。
+      qa_issue_key:
+        type: string
+        description: 結果を追うJiraのQAチケット。QA結果の正本はJira。
 
-# 未確定事項 (TBD): QA送付先・方法、entry/exit criteria、送付済み記録の正本。
+# 未確定事項 (TBD): 送付先Slackチャンネル・投稿フォーマット、
+# Slack投稿とJiraのQAチケットの相互リンク方法、entry/exit criteria。

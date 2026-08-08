@@ -25,18 +25,17 @@ QAに合格した機能・修正内容をまとめ、リリースノートを作
    会議体（PdM/PO + エンジニアリード + QAリード）が内容を確認する。承認基準は、QA合格に加え、リリースノート草稿の内容確認、リスク（影響範囲・ロールバック手順等）の確認（[approval-policy.md](../architecture/approval-policy.md)）。
 
 5. **公開**
-   承認されたリリースノートを公開する。公開先（Notion、Confluence、社内向けSlack、顧客向けチャネル等）はTBD。
+   承認されたリリースノートをNotionへ公開する。【決定】公開先・過去分のアーカイブ先ともNotionとし、Confluenceへはアーカイブしない（[source-of-truth.md](../architecture/source-of-truth.md)）。公開済みリリースノートのNotionページURLを `released` の証跡とする。Notion上のページ構成・データベース設計、社内向け/顧客向けを分けるかはTBD。
    Work Itemを `released` に遷移。
 
 ## 入力/出力まとめ
 
 | ステップ | 入力 | 出力 |
 |---|---|---|
-| 草稿作成 | QA合格済みWork Item群 + 仕様書 + GitHub実装 | `templates/release-note.md` を埋めた草稿 |
-| 公開 | 承認済み草稿 | 公開されたリリースノート（公開先TBD） |
+| 草稿作成 | QA合格済みWork Item群 + 仕様書 + マージ済みPR | `templates/release-note.md` を埋めた草稿 |
+| 公開 | 承認済み草稿 | Notion上の公開済みリリースノート（ページURLが公開証跡） |
 
 ## 未確定事項
 
 - リリース単位の定義（バージョニング規則）
-- リリースノートの公開先・フォーマット（社内向け/顧客向けを分けるか）
-- 過去のリリースノートのアーカイブ先（Confluence想定だが未確認）
+- Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分け

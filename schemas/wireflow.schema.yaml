@@ -1,5 +1,7 @@
 # Wireflow スキーマ
-# templates/wireflow.md に対応する画面・遷移の構造。正式ツール・同期方法はTBD。
+# templates/wireflow.md に対応する画面・遷移の構造。
+# ワイヤーフローの正式な成果物はFigma。本構造はFigmaの代替ではなく、
+# 画面ID・遷移・分岐条件を仕様書やJiraタスクから参照可能にするための草稿である。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/wireflow.schema.yaml"
@@ -9,9 +11,9 @@ required: [specification_id, screens, transitions]
 properties:
   specification_id:
     type: string
-  external_design_url:
+  figma_url:
     type: string
-    description: 外部デザインファイルがある場合の参照。正本の有無・ツールはTBD。
+    description: 正式な成果物であるFigmaファイルのURL。未作成の場合はTBDを明示する。
   screens:
     type: array
     items:
@@ -49,4 +51,5 @@ properties:
     items:
       type: string
 
-# 未確定事項 (TBD): ワイヤーフローの正式ツール、外部成果物との同期・正本。
+# 未確定事項 (TBD): Figmaファイルの命名規則・格納場所、
+# screens[].id とFigmaフレーム名の対応の付け方、Figma更新時に本草稿を追随させる責任者・タイミング。
