@@ -10,7 +10,7 @@ required: [release_identifier, release_date, changes]
 properties:
   release_identifier:
     type: string
-    description: バージョンまたは日付。リリース単位の規則はTBD。
+    description: リリース単位はバージョン番号。番号の付与規則（セマンティックバージョニング等）はTBD。
   release_date:
     type: string
     format: date
@@ -59,6 +59,6 @@ properties:
       approved_by:
         type: string
 
-# 未確定事項 (TBD): リリース単位（バージョニング規則）、
+# 未確定事項 (TBD): バージョン番号の付与規則・採番主体、
 # Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分け。
 # 公開承認者・基準は docs/architecture/approval-policy.md により確定（会議体: PdM/PO + エンジニアリード + QAリード）。

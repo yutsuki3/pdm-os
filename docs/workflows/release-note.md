@@ -15,10 +15,10 @@ QAに合格した機能・修正内容をまとめ、リリースノートを作
    対象Work Itemが `qa_passed` 状態であることを確認する。
 
 2. **対象範囲の確定**
-   同一リリースに含める複数のWork Itemを確定する。リリース単位（バージョン、日次、週次等）の定義はTBD。
+   同一リリースに含める複数のWork Itemを確定する。【決定】リリース単位はバージョン番号とする（日付単位・案件単位ではない）。バージョン番号の付与規則（セマンティックバージョニング等）と採番主体はTBD。
 
 3. **リリースノート草稿作成**
-   [prompts/create-release-note.md](../../prompts/create-release-note.md) に従い、各Work Itemの仕様書・Jiraタスク・GitHub実装（マージ済みPR/タグ）を参照し、[templates/release-note.md](../../templates/release-note.md) 形式で草稿を作成する。
+   [prompts/create-release-note.md](../../prompts/create-release-note.md) に従い、各Work Itemの仕様書・Jiraタスク・GitHubのマージ済みPRを参照し、[templates/release-note.md](../../templates/release-note.md) 形式で草稿を作成する。
    Work Itemを `release_note_drafting` に遷移。
 
 4. **レビュー・承認**
@@ -37,5 +37,5 @@ QAに合格した機能・修正内容をまとめ、リリースノートを作
 
 ## 未確定事項
 
-- リリース単位の定義（バージョニング規則）
+- バージョン番号の付与規則（セマンティックバージョニング等）と採番主体
 - Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分け

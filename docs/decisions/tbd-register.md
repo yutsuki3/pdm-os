@@ -20,7 +20,7 @@
 | TBD-004 | 各正本システムへの検索アクセス手段 | API連携かエクスポートデータの検索か | [knowledge-routing.md](../architecture/knowledge-routing.md) | 未着手 |
 | TBD-005 | 検索結果の関連度スコア算出方法 | `relevance_score` の意味・算出方法 | [knowledge-item.schema.yaml](../../schemas/knowledge-item.schema.yaml) | 未着手（Codex検討事項） |
 | TBD-006 | 検索範囲の権限制御 | PdM/POが閲覧権限を持たない情報を除外するか | [knowledge-routing.md](../architecture/knowledge-routing.md) | 未着手 |
-| TBD-007 | Notionへの仕様書反映方法・タイミング | 承認後、誰が・どう・いつNotionへ反映するか | [source-of-truth.md](../architecture/source-of-truth.md), [specification-agent.md](../agents/specification-agent.md) | 要確認 |
+| TBD-007 | Notionへの仕様書反映方法・タイミング | 【決定】PdM/POが承認時に手動で反映する。エージェントはNotionへ書き込まない。Notion上のページ構成・テンプレートはTBD-062 | [source-of-truth.md](../architecture/source-of-truth.md), [specification-agent.md](../agents/specification-agent.md) | 解決 |
 | TBD-008 | 意思決定ログの置き場所・フォーマット | Notion上のどこに「なぜその仕様にしたか」を記録するか | [source-of-truth.md](../architecture/source-of-truth.md) | 未着手 |
 | TBD-009 | Confluenceのスペース構成・検索範囲 | 過去仕様がどのスペースに、どこまで遡って存在するか | [source-of-truth.md](../architecture/source-of-truth.md) | 要確認 |
 | TBD-062 | Notion上のページ・データベース構成 | 要求原文（TBD-052）と公開済みリリースノート（TBD-053）をNotionのどのページ／データベースに、どの構成で保持するか。正本システムは確定済みで、その内部構成が未確定 | [source-of-truth.md](../architecture/source-of-truth.md) | 要確認 |
@@ -44,12 +44,12 @@
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-019 | プロジェクトキー・課題タイプ体系 | Jira上のプロジェクト構成 | [source-of-truth.md](../architecture/source-of-truth.md), [templates/jira-task.md](../../templates/jira-task.md) | 要確認 |
+| TBD-019 | プロジェクトキー・課題タイプ体系 | 【部分決定】階層は「1案件 (Work Item) = 1ストーリー + 配下に複数タスク」。課題タイプはJira標準（ストーリー / タスク）を使い、デザイン／実装の区別はラベル（`design` / `implementation`）で表す。プロジェクトキーの具体値は未確認 | [source-of-truth.md](../architecture/source-of-truth.md), [templates/jira-task.md](../../templates/jira-task.md), [jira-task.schema.yaml](../../schemas/jira-task.schema.yaml) | 検討中 |
 | TBD-020 | 必須カスタムフィールド | タスク作成時に必須の項目 | [templates/jira-task.md](../../templates/jira-task.md) | 要確認 |
-| TBD-021 | タスク分解の粒度基準 | 1画面1タスクか機能単位か | [workflows/spec-to-jira.md](../workflows/spec-to-jira.md), [prompts/decompose-tasks.md](../../prompts/decompose-tasks.md) | 未着手 |
+| TBD-021 | タスク分解の粒度基準 | ストーリーは案件と1対1（TBD-019で確定）。その配下のタスクを1画面1タスクで切るか機能単位で切るかは未確定 | [workflows/spec-to-jira.md](../workflows/spec-to-jira.md), [prompts/decompose-tasks.md](../../prompts/decompose-tasks.md) | 未着手 |
 | TBD-022 | 見積りの単位・タイミング | ストーリーポイント/時間、誰がいつ入れるか | [templates/jira-task.md](../../templates/jira-task.md) | 未着手 |
 | TBD-023 | デザイン/実装タスクの依存関係表現 | Jira上のリンク種別 | [workflows/spec-to-jira.md](../workflows/spec-to-jira.md) | 未着手 |
-| TBD-024 | 複数Jiraタスクの進捗をWork Item状態へ集約する方法 | 1つのWork Itemが複数タスクに分解された場合の集約方法 | [state-machine.md](../architecture/state-machine.md) | 未着手 |
+| TBD-024 | 複数Jiraタスクの進捗をWork Item状態へ集約する方法 | 【部分決定】1案件=1ストーリーであるため、集約単位はストーリー。配下タスクの進捗からストーリーの状態をどう導くか（全タスク完了で完了とするか、Jiraの自動遷移に任せるか）は未確定 | [state-machine.md](../architecture/state-machine.md) | 検討中 |
 
 ## 4. GitHub実装事実
 
@@ -81,15 +81,17 @@
 | TBD-032 | QA依頼の送付先・送付方法 | 【部分決定】送付はSlackで行い、投稿のパーマリンクを送付証跡とする（TBD-051）。送付先チャンネル・投稿フォーマット（スレッド運用の有無）は未確定 | [templates/qa-request.md](../../templates/qa-request.md), [workflows/qa-request.md](../workflows/qa-request.md) | 検討中 |
 | TBD-033 | entry/exit criteriaの具体的基準 | QA合否判定基準 | [templates/qa-request.md](../../templates/qa-request.md) | 未着手 |
 | TBD-065 | QA依頼投稿（Slack）とQAチケット（Jira）の相互リンク方法 | 送付証跡と結果の正本が別システムに分かれるため、両者を双方向に辿る方法が必要。投稿へのチケットキー記載、チケットへのパーマリンク記載等 | [workflows/qa-request.md](../workflows/qa-request.md), [qa-request.schema.yaml](../../schemas/qa-request.schema.yaml) | 未着手 |
+| TBD-067 | QAチケットをJira階層のどこに置くか | 1案件=1ストーリー+配下タスクの階層において、QAチケットをストーリー配下のタスクとするか別課題とするか | [source-of-truth.md](../architecture/source-of-truth.md), [workflows/qa-request.md](../workflows/qa-request.md) | 要確認 |
 | TBD-034 | QA不合格時の差し戻し先・再依頼フロー | どの状態に戻すか | [state-machine.md](../architecture/state-machine.md) | 未着手 |
 
 ## 8. リリース
 
 | ID | 項目 | 内容 | 関連ドキュメント | ステータス |
 |---|---|---|---|---|
-| TBD-035 | リリース単位の定義 | バージョニング規則（日次/週次/バージョン番号等） | [templates/release-note.md](../../templates/release-note.md) | 要確認 |
+| TBD-035 | リリース単位の定義 | 【決定】リリース単位はバージョン番号（日付単位・案件単位ではない）。番号の付与規則はTBD-066 | [templates/release-note.md](../../templates/release-note.md), [workflows/release-note.md](../workflows/release-note.md) | 解決 |
 | TBD-036 | リリースノートの公開先・フォーマット | 【部分決定】公開先はNotion（TBD-053）。Notion上のページ構成・データベース設計、社内向け/顧客向けの出し分けは未確定 | [workflows/release-note.md](../workflows/release-note.md) | 検討中 |
 | TBD-037 | 公開承認者・基準 | 【決定】TBD-014と同一。会議体（PdM/PO + エンジニアリード + QAリード）が、QA合格 + リリースノート内容確認 + リスク確認を基準に承認 | [approval-policy.md](../architecture/approval-policy.md), [workflows/release-note.md](../workflows/release-note.md) | 解決 |
+| TBD-066 | バージョン番号の付与規則・採番主体 | セマンティックバージョニングか連番か、誰がいつ番号を決めるか。リリース単位がバージョン番号であること自体はTBD-035で確定 | [templates/release-note.md](../../templates/release-note.md), [release-note.schema.yaml](../../schemas/release-note.schema.yaml) | 要確認 |
 | TBD-038 | 過去のリリースノートのアーカイブ先 | 【決定】アーカイブ先もNotion。Confluenceへはアーカイブしない | [workflows/release-note.md](../workflows/release-note.md), [source-of-truth.md](../architecture/source-of-truth.md) | 解決 |
 
 ## 9. AIツール・役割分担
@@ -145,3 +147,4 @@
 - 更新: Round 2のCodexレビューにより、`draft_id` の形式・同一草稿リスト内の一意性、検証用仮定の実記録参照必須を定義へ反映。TBD-061に機械検証方式の提案を追記。
 - 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。
 - 更新: ユーザーとの確認により、未割当だった正本（TBD-050〜053: 要求原文=Notion、QA依頼送付記録=Slack、QA結果=Jira、公開済みリリースノート=Notion）と、TBD-018（優先度=影響度×緊急度）・TBD-025（実装事実=マージ済みPR）・TBD-029（ワイヤーフロー=Figma）・TBD-031（受領判断が先、QAが後）・TBD-038が確定。[source-of-truth.md](../architecture/source-of-truth.md) の正本マッピングにSlackを追加し、関連するワークフロー・テンプレート・Schema・プロンプトへ反映した。派生して未確定になった項目をTBD-062〜065として追加。
+- 更新: ユーザーとの確認により、TBD-007（Notion反映はPdM/POが承認時に手動）・TBD-019（1案件=1ストーリー+配下タスク、デザイン/実装はラベル）・TBD-035（リリース単位=バージョン番号）が確定。TBD-024（集約単位はストーリー）を部分決定に更新。派生してTBD-066〜067を追加。

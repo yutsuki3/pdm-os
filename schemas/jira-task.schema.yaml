@@ -1,5 +1,7 @@
 # Jira Task Draft スキーマ
 # Jira登録前の候補を表す。Jira課題そのものの正本はJira。
+# 階層は「1案件 (Work Item) = 1ストーリー + 配下に複数タスク」。
+# 課題タイプはJira標準を使い、デザイン／実装の区別はラベルで表す。
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: "pdm-os/schemas/jira-task.schema.yaml"
@@ -22,10 +24,22 @@ properties:
     type: string
   issue_type:
     type: string
-    description: Jira上の課題タイプ体系はTBD。
+    description: >-
+      Jira標準の課題タイプ。案件全体を表すストーリーは story、個々の作業は task。
+      デザイン／実装の区別はここではなく work_category / labels_or_components で表す。
+    enum: [story, task]
+  work_category:
+    type: string
+    description: デザインか実装か。Jira上はラベルとして登録する。
+    enum: [design, implementation]
+  parent_story_ref:
+    type: string
+    description: >-
+      配下タスクが属するストーリーへの参照。登録後はストーリーのJira課題キー、
+      未登録の段階では work_item_id を用いる。issue_type が story の場合は指定しない。
   project_key:
     type: string
-    description: JiraプロジェクトキーはTBD。
+    description: Jiraプロジェクトキー。具体値はTBD。
   summary:
     type: string
   acceptance_criteria:
@@ -79,4 +93,5 @@ properties:
     type: string
     description: 登録後にJira正本を参照するためのキー。
 
-# 未確定事項 (TBD): 草稿IDの採番規則、Jiraプロジェクト、課題タイプ、必須フィールド、見積り・アサイン規則。
+# 未確定事項 (TBD): 草稿IDの採番規則、Jiraプロジェクトキーの具体値、必須カスタムフィールド、
+# タスクの分解粒度、見積り・アサイン規則、デザイン/実装タスク間のJiraリンク種別。

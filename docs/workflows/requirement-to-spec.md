@@ -35,7 +35,7 @@
    Work Item を `spec_review` に遷移し、レビューを経て承認されると `spec_approved` になる。承認者はPdM/PO単独。承認基準は、仕様書テンプレートの必須項目に加え、非機能要件・ワイヤーフロー（必要な場合）が明記済みであること（[approval-policy.md](../architecture/approval-policy.md)）。
 
 7. **Notionへの反映**
-   承認された仕様書はNotion（正本）へ反映される。反映方法・ページ構成はTBD ([source-of-truth.md](../architecture/source-of-truth.md))。
+   【決定】承認された仕様書は、PdM/POが承認時に手動でNotion（正本）へ反映する。エージェントはNotionへ書き込まない。Notion上のページ構成はTBD ([source-of-truth.md](../architecture/source-of-truth.md))。
 
 ## 入力/出力まとめ
 

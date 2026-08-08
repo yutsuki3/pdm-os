@@ -62,8 +62,8 @@ stateDiagram-v2
 | `spec_drafting` → `spec_review` | 仕様書草稿、必要な場合はワイヤーフロー草稿 | レビューに提示できる草稿。ワイヤーフローが必須となる条件: `TBD` | 人間がレビュー開始を確認 |
 | `spec_review` → `spec_drafting` | レビューで修正が必要 | 修正要求と対象草稿への参照。記録形式: `TBD` | 人間 |
 | `spec_review` → `spec_approved` | レビュー対象の仕様書草稿 | 人間の承認記録（必須項目・非機能要件・ワイヤーフローが明記済み）とNotion正本URL。Notion上のプロパティに記録 | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
-| `spec_approved` → `jira_tasks_created` | 承認済みNotion仕様書 | Jira課題が作成され、仕様書・Work Itemと相互リンク済み | 人間が登録・確認 |
-| `jira_tasks_created` → `in_progress` | Jira課題が存在する | 作業開始のJira状態。Work Itemへの集約規則: `TBD` | Jira情報を人間が確認 |
+| `spec_approved` → `jira_tasks_created` | 承認済みNotion仕様書 | 案件のストーリー1件と配下タスクがJiraに作成され、仕様書・Work Itemと相互リンク済み | 人間が登録・確認 |
+| `jira_tasks_created` → `in_progress` | 案件のストーリーと配下タスクが存在する | 作業開始のJira状態。Work Itemと1対1で対応するストーリーが集約単位。ストーリーの状態を配下タスクからどう導くかの規則: `TBD` | Jira情報を人間が確認 |
 | `in_progress` → `delivered` | 配下の作業が完了報告された | 成果物（GitHub/Drive）への参照。完了判定・集約規則: `TBD` | 人間が確認 |
 | `delivered` → `acceptance_review` | 承認済み仕様書、GitHubのマージ済みPR、Drive受領原本を特定できる | 受領レポート草稿 | Acceptance Agentは草稿作成のみ |
 | `acceptance_review` → `accepted` / `rejected` | 受領レポートと差異一覧 | 人間の判断記録（`decision`、判断者、日時）。Notion上のプロパティに記録。軽微な差異は記録の上で受領。「軽微」の線引き基準は `TBD` | 人間（PdM/PO単独、[approval-policy.md](approval-policy.md)） |
@@ -77,7 +77,7 @@ stateDiagram-v2
 ## 未確定事項
 
 - `rejected` / `qa_failed` からの差し戻し先が常に `in_progress` でよいか（`requirement_defined` / `spec_drafting` に戻すケースがあるか）はTBD。戻り先は図に示しておらず、確定した遷移規則ではない。
-- 1つのWork Itemが複数のJiraタスクに分解された場合、それぞれの進捗をどうWork Item全体の状態に集約するかはTBD。
+- 【決定】Jira上の階層は「1案件 (Work Item) = 1ストーリー、その配下に複数タスク」であり、Work Itemの集約単位はストーリーである。ただし配下タスクの進捗からストーリーの状態をどう導くか（全タスク完了で完了とするか、Jiraの自動遷移に任せるか）はTBD。
 - 状態遷移をJiraのステータスと自動同期するか、PdM OS独自に管理するかはTBD。
 - 遷移履歴（誰がいつ何を根拠に状態を確定したか）の保存先・最小項目はTBD。
 - QA依頼の送付証跡（Slack）とQA結果（Jira）は正本が分かれる。両者をどう相互リンクして辿るかはTBD。

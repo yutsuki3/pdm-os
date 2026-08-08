@@ -11,10 +11,10 @@ PdM OSはデータを複製・保有しない。各ドメインについて、�
 | ドメイン | 正本システム | 読み書き | 主な利用エージェント | 備考 |
 |---|---|---|---|---|
 | 要求・要望の原文 | Notion | 読み取り（要件化の起点） | Knowledge Agent, Orchestrator | 要件化前の原文もNotion上に保持する。ページ構成はTBD |
-| 現行仕様と意思決定 | Notion | 読み書き（仕様書は書込み対象） | Specification Agent, Knowledge Agent | 仕様書の正式版はNotion上に存在する前提 |
+| 現行仕様と意思決定 | Notion | エージェントは読み取りのみ。書込みは人間が手動で行う | Specification Agent, Knowledge Agent | 仕様書の正式版はNotion上に存在する前提 |
 | 過去仕様 | Confluence | 読み取りのみ | Knowledge Agent | 現行仕様の代替にしない。経緯確認用 |
 | 受領原本とGoogle Docs | Google Drive | 読み取り（受領判断対象） | Acceptance Agent | 「受領原本」の具体的なファイル種別・命名規則はTBD |
-| タスク状態 (Jiraチケットのステータス) | Jira | 読み書き（タスク作成・状態参照） | Orchestrator, Specification Agent | プロジェクトキー・課題タイプ体系はTBD |
+| タスク状態 (Jiraチケットのステータス) | Jira | 読み書き（タスク作成・状態参照） | Orchestrator, Specification Agent | 1案件=1ストーリー+配下タスク。プロジェクトキーの具体値はTBD |
 | QA結果 | Jira | 読み取り（QAチケットの状態・結果） | Release Agent, Orchestrator | QAチケットのステータスと結果記録を正本とする |
 | QA依頼の送付記録 | Slack | 読み取り（送付証跡） | Release Agent | QAチャンネルへの投稿を送付済みの証跡とする。チャンネル・投稿形式はTBD |
 | 実装事実 | GitHub | 読み取りのみ | Acceptance Agent | 単位は**マージ済みPR**（下記参照） |
@@ -37,7 +37,7 @@ PdM OSはデータを複製・保有しない。各ドメインについて、�
 ### Notion（要求原文・現行仕様と意思決定・公開済みリリースノート）
 
 - 「今、何が正しい仕様か」を確認する唯一の場所。
-- 仕様書のドラフトが承認された場合、最終的にNotion側へ反映される想定（反映方法・ページ構成・テンプレートはTBD）。
+- 【決定】承認された仕様書は、**PdM/POが承認時に手動で**Notionへ反映する。エージェントはNotionへ書き込まない。Notion上のページ構成・テンプレートはTBD。
 - 意思決定ログ（なぜその仕様にしたか）もNotion側に存在する前提だが、具体的な置き場所・フォーマットはTBD。
 - 【決定】要件化前の要求・要望の原文もNotionを正本とする。要件・仕様書は原文のNotionページを出所として参照する。原文を保持するページ／データベースの構成はTBD。
 - 【決定】公開済みリリースノートの公開先・アーカイブ先もNotionとする。Confluenceへはアーカイブしない。
@@ -57,8 +57,9 @@ PdM OSはデータを複製・保有しない。各ドメインについて、�
 ### Jira（タスク状態・QA結果）
 
 - デザイン・実装タスクの状態管理はJiraが正本。
-- 仕様書からタスクを作成する際のプロジェクト・課題タイプ・カスタムフィールドの体系はTBD ([templates/jira-task.md](../../templates/jira-task.md) 参照)。
-- 【決定】QA結果（合格／不合格）もJiraを正本とする。QAチケットのステータスと結果記録を参照し、`qa_passed` / `qa_failed` の証跡とする。QAチケットの課題タイプ・ステータス体系はプロジェクト体系のTBDに含む。
+- 【決定】階層は「1案件 (Work Item) = 1ストーリー、その配下に複数タスク」。課題タイプはJira標準（ストーリー / タスク）を使い、デザインと実装の区別はラベル（`design` / `implementation`）で表す。
+- プロジェクトキーの具体値・必須カスタムフィールドはTBD ([templates/jira-task.md](../../templates/jira-task.md) 参照)。
+- 【決定】QA結果（合格／不合格）もJiraを正本とする。QAチケットのステータスと結果記録を参照し、`qa_passed` / `qa_failed` の証跡とする。QAチケットをこの階層のどこに置くか（ストーリー配下のタスクか、別課題か）はTBD。
 
 ### Slack（QA依頼の送付記録）
 
