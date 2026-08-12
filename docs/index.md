@@ -23,6 +23,7 @@
 - [qa-request.md](workflows/qa-request.md) — QA依頼作成
 - [release-note.md](workflows/release-note.md) — リリースノート作成
 - [pilot-core-flow.md](workflows/pilot-core-flow.md) — 実案件でのコアフローパイロット手順
+- [pilot-setup.md](workflows/pilot-setup.md) — パイロット開始前に各正本システム側で用意するもの
 
 ## agents — エージェント定義
 

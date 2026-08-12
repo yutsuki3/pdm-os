@@ -148,3 +148,4 @@
 - 更新: ユーザーとの確認により承認ポリシー（TBD-010〜017）が確定。[approval-policy.md](../architecture/approval-policy.md)・[state-machine.md](../architecture/state-machine.md)・関連ワークフローに反映し、ステータスを`解決`に変更。
 - 更新: ユーザーとの確認により、未割当だった正本（TBD-050〜053: 要求原文=Notion、QA依頼送付記録=Slack、QA結果=Jira、公開済みリリースノート=Notion）と、TBD-018（優先度=影響度×緊急度）・TBD-025（実装事実=マージ済みPR）・TBD-029（ワイヤーフロー=Figma）・TBD-031（受領判断が先、QAが後）・TBD-038が確定。[source-of-truth.md](../architecture/source-of-truth.md) の正本マッピングにSlackを追加し、関連するワークフロー・テンプレート・Schema・プロンプトへ反映した。派生して未確定になった項目をTBD-062〜065として追加。
 - 更新: ユーザーとの確認により、TBD-007（Notion反映はPdM/POが承認時に手動）・TBD-019（1案件=1ストーリー+配下タスク、デザイン/実装はラベル）・TBD-035（リリース単位=バージョン番号）が確定。TBD-024（集約単位はストーリー）を部分決定に更新。派生してTBD-066〜067を追加。
+- 追記: 確定した正本マッピングから逆算し、各システム側の準備要件を [pilot-setup.md](../workflows/pilot-setup.md) に整理。TBD-020 / 028 / 032 / 062 / 064 / 065 / 067 について、採否を判断できる形の【提案】を記載した（提案段階であり、ステータスは変更していない）。
