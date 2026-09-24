@@ -1,5 +1,11 @@
 # ワークフロー: リリースノート作成
 
+## 対応する状態遷移
+
+`qa_passed` → `release_note_drafting` → `released`
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 QAに合格した機能・修正内容をまとめ、リリースノートを作成する。

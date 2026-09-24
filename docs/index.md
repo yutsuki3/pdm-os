@@ -45,7 +45,7 @@
 
 ## 関連
 
-- [schemas/](../schemas/) — データ構造定義
-- [templates/](../templates/) — 成果物テンプレート
+- [schemas/](../schemas/) — データ構造定義（YAML形式）
+- [templates/](../templates/) — 成果物テンプレート（Markdown形式）
 - [prompts/](../prompts/) — エージェント向けプロンプト
-- [examples/pilot-feature/](../examples/pilot-feature/) — サンプルケース
+- [examples/pilot-feature/](../examples/pilot-feature/) — パイロット検証のサンプルケース・ダミーデータ

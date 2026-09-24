@@ -1,5 +1,11 @@
 # ワークフロー: QA依頼作成
 
+## 対応する状態遷移
+
+`accepted` → `qa_requested` → `qa_passed` / `qa_failed`
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 受領判断を経た（または受領判断のために必要な）機能について、QAチームへ検証を依頼する文書を作成する。

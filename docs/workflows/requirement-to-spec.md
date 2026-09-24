@@ -1,5 +1,11 @@
 # ワークフロー: 要求・要望 → 要件整理 → 仕様書
 
+## 対応する状態遷移
+
+`requested` → `requirement_defined` → `spec_drafting` → `spec_review` → `spec_approved` → `jira_tasks_created`
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 ステークホルダーからの要求・要望を整理し、既存資料を踏まえた仕様書・ワイヤーフローに落とし込む。

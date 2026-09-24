@@ -1,5 +1,11 @@
 # ワークフロー: 仕様書 → Jiraタスク分解
 
+## 対応する状態遷移
+
+`spec_approved` → `jira_tasks_created` → `in_progress`
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 承認済みの仕様書を、デザイン・実装それぞれのJiraタスクへ分解する。

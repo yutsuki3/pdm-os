@@ -66,8 +66,13 @@ pdm-os/
 7. [docs/agents/](docs/agents/) — エージェントの役割、[ai-tool-roles.md](docs/agents/ai-tool-roles.md) — Claude/Codex/Gemini/Notion AIの暫定役割分担
 8. [schemas/](schemas/) / [templates/](templates/) / [prompts/](prompts/) — 実体となるデータ定義
 
-## この段階の担当
+## 進行状況
 
+### 確定済みの設計
+- **承認ポリシー（TBD-010〜017）**: 5つの承認ゲート（要件確定・仕様書承認・受領判断・QA依頼送付可否・リリース可否）について、承認者（PdM/PO単独 or 会議体）と承認基準を確定しました。詳細は [docs/architecture/approval-policy.md](docs/architecture/approval-policy.md) を参照してください。
+- **パイロット検証（TBD-058〜060）**: ダミーデータを用いたフルパイプライン検証を実施し、`draft_id` による草稿ID管理、`trace_refs` / `dependency_refs` による要件・ワイヤーフロー・タスク間の参照構造が、実装段階でも機能することを確認しました。詳細は [examples/pilot-feature/validation-run-002.md](examples/pilot-feature/validation-run-002.md) を参照してください。
+
+### 今後の作業
 現在は設計フェーズであり、Claude Codeが主に業務フローの構造化・状態遷移設計・成果物と責務の整理・承認ポイントの設計・不足している業務ルールの抽出・文書とテンプレートの初期案作成を担当しています。後続でCodexがSchema・ファイル構造・文書間の整合性をレビューし具体化します。詳細・他ツールとの暫定的な役割分担は [docs/agents/ai-tool-roles.md](docs/agents/ai-tool-roles.md) を参照してください。
 
 ## 未確定事項 (TBD) の扱い
