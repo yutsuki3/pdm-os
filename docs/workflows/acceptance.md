@@ -1,5 +1,11 @@
 # ワークフロー: 完了成果物の受領判断
 
+## 対応する状態遷移
+
+`delivered` → `acceptance_review` → `accepted` / `rejected`
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 デザイン・実装が完了した成果物を仕様書と突き合わせ、PdM/POが受領するかどうかを判断するための材料を用意する。
