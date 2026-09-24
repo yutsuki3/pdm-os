@@ -1,5 +1,11 @@
 # パイロット: 要求・要望からJiraタスク草稿まで
 
+## 対応する段階
+
+`requested` → `requirement_defined` → `spec_drafting` → `spec_review` → `jira_tasks_created`（Jira登録は実施、状態遷移は確定しない）
+
+詳細は [state-machine.md](../architecture/state-machine.md) を参照してください。
+
 ## 目的
 
 【提案】実装・外部システムへの書き込みを開始する前に、1件の低リスクな実案件を用いて、`requested` から `spec_review` のレビュー準備、およびJiraタスク**草稿**までの成果物契約を検証する。
